@@ -12,10 +12,6 @@ pr:
     certSecureFile: 'dummy'
     certPwd: 'dummy'
     keychain: 'temp'
-- task: CocoaPods@0
-  inputs:
-    workingDirectory: '$(Build.Source.Directory)/ios/App'
-    forceRepoUpdate: false
 pool:
   vmImage: 'ubuntu-latest'
 
