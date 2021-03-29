@@ -1,0 +1,42 @@
+
+<ion-header class="mybg">
+  <ion-toolbar color="mytheme">
+    <ion-buttons slot="start">
+        <ion-back-button color="light"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="light">Details</ion-title>
+    <ion-buttons slot="end">
+      <ion-button [disabled]="viewType === 'true'" (click)="fun.navigate('cart')">
+        <ion-icon name="cart" slot="icon-only" class="white top-btn ion-no-margin"  ></ion-icon>
+      </ion-button>
+      <!-- <ion-button>
+        <ion-icon name="search" slot="icon-only" class="white top-btn ion-no-margin" ></ion-icon>
+      </ion-button> -->
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="product">
+      <app-product (notify)="onReviewClick($event)" [product]="product" [slider]="slider" class="slide"></app-product>
+   
+</ion-content>
+<ion-footer class="footer" class="ion-align-items-center" *ngIf="segment == 'Overview'">
+  <ion-row *ngIf="product" class="ion-align-items-center">
+    <ion-col class="ion-padding" >
+        <del  class="foot-highlight ion-no-margin" *ngIf="product.discount > '0'">
+          Rs. {{product.price }}
+        </del>
+      <br>
+      <ion-text *ngIf="product.discount <= '0'">
+        <h3  class="foot-highlight ion-no-margin" >Rs. {{product.price }}</h3>
+      </ion-text>
+
+      <ion-text *ngIf="product.discount > '0'">
+        <h3  class="foot-highlight ion-no-margin" >Rs. {{(product.price-((product.price/100)*product.discount) )}}</h3>
+      </ion-text>
+    </ion-col>
+    <ion-col size="4">
+      <ion-button [disabled]="viewType === 'true'" (click)="AddToCart(product)"  class="white foot-btn ion-float-right ion-no-margin" color="mycolor1"  expand="block"><strong>Buy</strong></ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

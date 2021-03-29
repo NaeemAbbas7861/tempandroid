@@ -1,0 +1,200 @@
+<!-- /**
+ * Shoppr - E-commerce app starter Ionic 4(https://www.enappd.com)
+ *
+ * Copyright © 2018-present Enappd. All rights reserved.
+ *
+ * This source code is licensed as per the terms found in the
+ * LICENSE.md file in the root directory of this source .
+ */ -->
+
+<ion-header>
+  <ion-toolbar color="mytheme">
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-title color="light" class="ion-text-center">Cart</ion-title>
+    <ion-back-button  color="light" defaultHref="/" slot="end"> </ion-back-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding-top">
+  <div class="mid" *ngIf="!show">
+    <ion-row size="12" class="ion-justify-content-center" disabled="true">
+      <button class="circle">
+        <ion-icon name="cart" size="large"></ion-icon>
+      </button>
+    </ion-row>
+    <ion-row size="12" class="ion-justify-content-center" disabled="true">
+      <ion-text><strong>Your cart is empty</strong></ion-text>
+    </ion-row>
+    <ion-row size="12" class="ion-justify-content-center" disabled="true">
+      <ion-button fill="clear" color="primary" (click)="browse()">Browse Products</ion-button>
+    </ion-row>
+  </div>
+  <div *ngIf="show">
+    <ion-row class="ion-margin-horizontal ion-margin-bottom">
+      <ion-text><strong class="text">Items in Cart</strong></ion-text>
+    </ion-row>
+    <ion-list #slidingList>
+      <ion-item-sliding class="ion-no-padding ion-no-margin" *ngFor="let item of items; let j = index;" class="card" >
+        <ion-item lines="none">
+          <ion-row>
+            <ion-col size="3" class="ion-text-center">
+              <!-- <img *ngIf="show.logo" src="" alt="item.title"> -->
+              <ion-img *ngIf="item.imagepath" src={{env.RESOURCE_URL}}{{item.imagepath}} class="settpic" alt="item.title"></ion-img> 
+              <ion-img *ngIf="!item.imagepath" src='../../assets/images/noimage.jpg' alt="item.title"  class="settpic"></ion-img> 
+              <ion-text color="danger" class="small" (click)="remove(j)">Remove</ion-text>
+            </ion-col>
+            <ion-col size="6">
+              <h3  class="item-name ion-no-margin">{{item.title}}</h3>
+              <h5  class="item-def ion-no-margin">{{item.dimension}}</h5>
+              <h5  class="item-def ion-no-margin">Rs.{{ item.price - (item.price/100)* item.discount}}</h5>
+              <!-- <h5  class="item-def ion-no-margin">shipping: {{item.product.currency}}{{item.product.shipping}}</h5> -->
+              <!-- <h5  class="item-def ion-no-margin">Dec 31 - Jan 17</h5> -->
+            </ion-col>
+            <ion-col size="3" class="ion-float-right">
+              <ion-row class="ion-text-end ion-justify-content-end">
+                <!-- <h3  class="item-name ion-text-end ion-no-margin" *ngIf="item.product.offer" >{{item.product.currency}}{{fun.calculate(item.product.cost_price,
+                  item.product.discount)}}</h3>
+                <h3  class="item-name ion-text-end ion-no-margin" *ngIf="item.product.offer" ><span class="cut">{{item.product.currency}}{{item.product.cost_price}}</span></h3> -->
+                <h3 class="ion-no-margin ion-text-end" class="item-name" >Quantity</h3>
+              </ion-row>
+              <ion-row class="ion-justify-content-end">
+                <ion-select placeholder="-" interface="popover" [interfaceOptions]="customAlertOptions" [(ngModel)]='item.quantity' (ionChange)="updatequantity(item.productId , item.quantity)"
+                  class="select">
+                  <ion-select-option *ngFor="let q of item.dropdown; let i = index" [(value)]="item.dropdown[i]" class="ion-text-center">{{q}}</ion-select-option>
+                </ion-select>
+              </ion-row>
+            </ion-col>
+          </ion-row>
+        </ion-item>
+        <ion-item-options side="end">
+          <ion-item-option color="danger" (click)="remove(j)">
+            <ion-icon name="trash" size="large"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+    <ion-row size="12" class="ion-justify-content-center" disabled="true">
+        <ion-button fill="outline" color="warning" (click)="browse()">Continue shopping</ion-button>
+      </ion-row>
+      <!-- <ion-row>
+        <ion-col>
+          <ion-input class="ion-clearInput" type="text" placeholder="Delivery_Address" name="Delivery_Address" [(ngModel)]="Delivery_Address" class="input ion-padding-horizontal" ></ion-input>
+        </ion-col>
+      </ion-row> -->
+      
+        <ion-list class="ion-margin-top" *ngIf="isReturnable">
+          <ion-item>
+            <ion-label color="mytheme">Do you want to Exchange Product</ion-label>
+            <ion-toggle slot="end" name="Exchange" color="mycolor1" [(ngModel)]="Exchange" ng-checked="true"></ion-toggle>
+          </ion-item>
+        </ion-list>
+        
+        <ion-row class="ion-margin" *ngIf="Exchange"  color="mytheme" >
+          <ion-col >
+             <h3 class="item-name" >Exchange product name</h3>
+             <ion-select [(ngModel)]="returnitem" interface="popover" class="custom-options"  class="select"  >
+              <ion-select-option [value]="return" *ngFor="let return of returndiscountitem" > {{return.name}}   , <b>RS:</b> {{return.price}} </ion-select-option>
+            </ion-select>
+        </ion-col>
+        <ion-col size="3" class="ion-float-right">
+          <ion-row class="ion-text-end ion-justify-content-end">
+           <h3 class="ion-no-margin ion-text-end" class="item-name" >Quantity</h3>
+          </ion-row>
+          <ion-row class="ion-justify-content-end">
+           <ion-select interface="popover" class="custom-options"  class="select" [disabled]="!returnitem" [(ngModel)]="returnQuantity"  (ngModelChange)="crazyEvent()">
+            <ion-select-option *ngFor="let q of returnquantities"  class="ion-text-center"  [value]="q">{{q}}</ion-select-option>
+            </ion-select>
+          </ion-row>
+        </ion-col>
+        </ion-row>
+   
+    <ion-row class="ion-margin">
+      <ion-text><strong class="text">Order Summary</strong></ion-text>
+    </ion-row>
+    <div lines="none" class="card ion-no-margin ion-padding-bottom" >
+      <ion-row class="full ion-padding-horizontal" >
+        <ion-col size="9">
+          <ion-text>Item Total</ion-text>
+        </ion-col>
+        <!-- <ion-col size="3" class="ion-text-end">
+          <ion-text>{{data[0].product.currency}}{{fix(calculate(0))}}</ion-text>
+        </ion-col> -->
+        <ion-col size="3" class="ion-text-end">
+          <ion-text *ngIf = "items"> Rs. {{total}}</ion-text>
+        </ion-col>
+      </ion-row>
+    
+      <ion-row class="full" class="ion-padding-horizontal">
+        <ion-col size="9">
+          <ion-text>Shipping charges are payable at <br>the time of delivery</ion-text>
+        </ion-col>
+        <ion-col size="3" class="ion-text-end">
+          <ion-text>Rs. {{shipping}}</ion-text>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="full" class="ion-padding-horizontal" *ngIf="Exchange">
+        <ion-col size="9">
+          <ion-text>Return Discount</ion-text>
+        </ion-col>
+        <ion-col size="3" class="ion-text-end" >
+          <ion-text>Rs. {{returndiscount }}</ion-text>  
+        </ion-col>
+      </ion-row>
+      <ion-row class="full" class="ion-padding-horizontal" *ngIf="!Exchange">
+        <ion-col size="9">
+          <ion-text>Total</ion-text>
+        </ion-col>
+        <!-- <ion-col size="3" class="ion-text-end">
+          <ion-text>{{data[0].product.currency}}{{fix(add())}}</ion-text>
+        </ion-col> -->
+        <ion-col size="3" class="ion-text-center" >
+          <ion-text>Rs. {{total + shipping  }}</ion-text>
+        </ion-col>
+      </ion-row>
+      <ion-row class="full" class="ion-padding-horizontal" *ngIf="Exchange">
+        <ion-col size="9">
+          <ion-text>Total</ion-text>
+        </ion-col>
+        <!-- <ion-col size="3" class="ion-text-end">
+          <ion-text>{{data[0].product.currency}}{{fix(add())}}</ion-text>
+        </ion-col> -->
+        <ion-col size="3" class="ion-text-end" >
+          <ion-text>Rs. {{total + shipping - returndiscount }}</ion-text>
+        </ion-col>
+      </ion-row>
+      <div class="sep"></div>
+      <ion-row>
+        <ion-col>
+          <ion-text class="item-def" class="ion-text-start">
+            <div class="pad">
+              By tapping 'Checkout' you agree to the <a (click)="open_modal(true)" class="mycolor">Terms of Use</a>
+              and <a class="mycolor" (click)="open_modal(false)">Privacy Policy</a>
+            </div>
+          </ion-text>
+        </ion-col>
+      </ion-row>
+      <div class="sep"></div>
+      <ion-row>
+        <ion-col>
+          <ion-text class="item-def ion-text-start ion-padding-bottom" >
+            <div class="mycolor pad">
+              30 Day Free Return and Refund
+            </div>
+          </ion-text>
+        </ion-col>
+      </ion-row>
+    </div>
+  </div>
+   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+</ion-content>
+<ion-footer *ngIf="show" (click)="presentAlertConfirm()">
+  <!-- <ion-footer *ngIf="show"> -->
+  <ion-toolbar color="mycolor1">
+    <ion-title class="ion-text-center">Checkout</ion-title>
+  </ion-toolbar>
+</ion-footer>

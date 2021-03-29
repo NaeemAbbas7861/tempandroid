@@ -1,0 +1,57 @@
+<!-- /**
+ * Shoppr - E-commerce app starter Ionic 4(https://www.enappd.com)
+ *
+ * Copyright © 2018-present Enappd. All rights reserved.
+ *
+ * This source code is licensed as per the terms found in the
+ * LICENSE.md file in the root directory of this source .
+ */ -->
+
+<ion-header class="ion-padding" color="mytheme" class="mybg head">
+    <ion-toolbar color="mytheme">
+        <ion-buttons slot="start">
+          <ion-back-button color="light"></ion-back-button>
+        </ion-buttons>
+      </ion-toolbar>
+    <ion-row class="ion-justify-content-center">
+      <ion-img src="assets/images/logo.png" class="head-image"></ion-img>
+    </ion-row>
+  </ion-header>
+
+<ion-content class="ion-padding">
+  <ion-text><h3  class="title ion-no-margin ion-margin-bottom ion-text-center">Verify your Account</h3></ion-text>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-label><ion-text class="small">Enter 4 digit Verification Code</ion-text></ion-label>
+        <!-- <ion-input  type="email" placeholder="Email" [(ngModel)]="email" class="input ion-clearInput ion-padding-horizontal" ></ion-input> -->
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-text-center">
+      <ion-col>
+       <ion-input #otp1 required maxLength="1" [(ngModel)]="otp5" (keyup)="otpController($event,otp2,'')">
+       </ion-input>
+       <ion-input #otp2 required maxLength="1" [(ngModel)]="otp6" (keyup)="otpController($event,otp3,otp1)">
+       </ion-input>
+       <ion-input #otp3 required maxLength="1" [(ngModel)]="otp7" (keyup)="otpController($event,otp4,otp2)">
+       </ion-input>
+       <ion-input #otp4  required maxLength="1" [(ngModel)]="otp8" (keyup)="otpController($event,'',otp3)">
+       </ion-input>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <countdown class="settimer"  #cd1 [config]="{leftTime: 60}" color="mycolor1" ></countdown>
+
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-button expand="block" disabled="{{buttonDisabled}}" (click)="cd1.restart()" (click)="resendMessage()"  color="mycolor1"><strong class="white"  [disabled]="click" >resend</strong></ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button expand="block" color="mycolor1" (click)="verify()"><strong class="white">Confirm</strong></ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

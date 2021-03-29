@@ -1,0 +1,72 @@
+<ion-header class="mybg">
+  <ion-toolbar color="mytheme">
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-title style="display: flex; align-items: center;" color="light">Order Items</ion-title>
+    <ion-buttons slot="end" >
+      <ion-back-button text="" color="light" icon="chevron-back-outline"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content  class="ion-padding"  color="light" >
+
+  <ion-card >
+     <table *ngIf = "items" >
+        <tr>
+          <td><B>product</B></td>
+          <td><b>price </b></td>
+          <td><b>Quantity</b></td>
+          <td><b>Total</b></td>
+        </tr>
+        <tr *ngFor= "let item of items.orderItems">
+          <td> {{item.product.title}}</td>
+          <td> {{item.product.price - (item.product.price/100)*item.product.discount}}</td>
+          <td> {{item.quantity}}</td>
+          <td> {{(item.product.price - (item.product.price/100)*item.product.discount) *item.quantity}}</td>
+        </tr>
+        <tr *ngIf="!returnDiscount">
+          <td><b>Returnable Product RS:</b></td>
+          <td *ngIf="items.returnDiscount > 0 "> {{items.returnDiscount}}</td>
+          <td *ngIf="items.returnDiscount <= 0 ">0 </td>
+          <td><b>Shipping Amount:</b></td>
+          <td>{{items.deliveryCharges}}</td>
+        </tr>
+        <tr>
+          <td><b>Total Net Amount:</b></td>
+          <td>{{items.totalAmmount - items.returnDiscount }}</td>
+        </tr>
+      </table>
+  </ion-card>
+  <ion-card *ngIf = "items">
+    <ion-item>
+      Customer Details
+    </ion-item>
+    <ion-card-content>
+      <p> Name: {{items.user.firstName}} {{items.user.lastName}} </p>
+      <p> Contact: 0{{items.user.contact_Number}}</p>
+      <p> email: {{items.user.email_Address}}</p>
+      <p> Address: {{items.user.address}}</p>
+    </ion-card-content>
+  </ion-card>
+  
+  <ion-card  *ngIf="items " >
+    <ion-item *ngIf="items.orderStatus===2 || items.orderStatus===1 ">
+      Riders Details
+    </ion-item>
+    <ion-card-content *ngIf="items.orderStatus===2 || items.orderStatus===1 ">
+      <p> Name: {{items.rider.firstName}} {{items.rider.lastName}} </p>
+      <p> Contact: 0{{items.user.contact_Number}}</p>
+      <p> Address: {{items.rider.address}}</p>
+      <p> Cnic: {{items.rider.cnic}}</p>
+    </ion-card-content>
+  </ion-card>
+
+
+
+  <div style="min-height: 300px;" >
+    <div   #mapElement class="map" style="min-height: 300px;"></div>
+  </div>
+
+</ion-content>

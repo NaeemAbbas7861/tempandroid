@@ -1,0 +1,65 @@
+<!-- 
+<ion-header class="mybg">
+  <ion-toolbar color="mytheme">
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-title  color="light" class="ion-text-center">Dashboard</ion-title>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content fullscreen  *ngIf="data">
+  
+  <ion-row>
+    <ion-col>
+      <ion-card style="height: 100px; width: 150px;" (click)=" Onclick()" >
+        <ion-card-content >
+          <ion-icon color="mycolor1" name="create-outline" style="margin-left: 40px;" size="large"></ion-icon><br>
+          <ion-text class="ion-text-center" style="margin-top: 35px; font-size: 16px;">Add new Shop</ion-text><br>
+           </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col>
+      <ion-card style="height: 100px; width: 150px;" (click)=" Onclick1()">
+        <ion-card-content >
+          <ion-icon color="mycolor1" name="send-outline" style="margin-left: 40px;" size="large"></ion-icon><br>
+          <ion-text class="ion-text-center"style="margin-top: 35px; font-size: 16px;">Active Shops</ion-text><br>
+          <ion-text class="ion-text-center" style="margin-top: 35px; font-size: 16px; padding-left: 40px;">{{data.activeShops}} </ion-text>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-card style="height: 100px; width: 150px; " (click)=" Onclick1()">
+        <ion-card-content >
+          <ion-icon name="chatbubbles-outline"  color="mycolor1" style="margin-left: 40px;" size="large"></ion-icon><br>
+          <ion-text class="ion-text-center" style="margin-top: 35px; font-size: 16px;">Deactive Shops</ion-text><br>
+          <ion-text class="ion-text-center" style="margin-top: 35px; font-size: 16px; padding-left: 40px;"> {{data.deactiveShops}}</ion-text>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col>
+      <ion-card style="height: 100px; width: 150px;" (click)=" Onclick3()">
+        <ion-card-content >
+          <ion-icon name="pricetags-outline" color="mycolor1" style="margin-left: 40px;" size="large"></ion-icon><br>
+          <ion-text class="ion-text-center" style="margin-top: 35px; font-size: 16px; padding-left: 20px;">Products</ion-text><br>
+          <ion-text class="ion-text-center" style="margin-top: 35px; font-size: 16px; padding-left: 40px;"> {{data.products}}</ion-text>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-card style="height: 100px; width: 150px;"  (click)="OrdersClick()">
+        <ion-card-content >
+          <ion-icon name="document-text-outline" color="mycolor1" style="margin-left: 40px;" size="large"></ion-icon><br>
+          <ion-text (click)=" Onclick()" class="ion-text-center" style="margin-top: 35px; font-size: 16px; padding-left: 08px;">New Orders</ion-text><br>
+          <ion-text class="ion-text-center" style="margin-top: 35px; font-size: 16px; padding-left: 40px;">  {{data.newOrders}}</ion-text>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+
+</ion-content> -->

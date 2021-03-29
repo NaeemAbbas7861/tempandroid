@@ -1,0 +1,47 @@
+<ion-header class="mybg">
+  <ion-toolbar color="mytheme">
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-back-button  color="light" defaultHref="/" slot="end"> </ion-back-button>
+    <ion-title  color="light" class="ion-text-center">Shop Products</ion-title>
+  </ion-toolbar>
+</ion-header>
+<div slot="start" class="pad">
+ <ion-searchbar placeholder="Search..." expand="full"  [(ngModel)]="searchQuery" (ionChange)="search()"></ion-searchbar> 
+</div>
+<ion-buttons slot="end" >
+  <ion-back-button text="" color="light" icon="chevron-back-outline"></ion-back-button>
+</ion-buttons>
+<ion-content *ngIf = "shop" class="ion-padding"  color="light">
+
+  <ion-card *ngFor= "let product of shop.products">
+    <ion-item>
+    <ion-label><b>{{product.title}}</b></ion-label>
+    <ion-button slot="end" name="Active">Active</ion-button>
+    <!-- <ion-icon slot ="end" name="pencil-outline" routerLink = "edit/{{product.id}}" ></ion-icon> -->
+  </ion-item>
+  
+    <ion-card-content>
+      <p *ngIf="product.isAllowed && !product.isDisabled" ><b> Status:</b> <span style="color: green;">Active</span></p>
+      <p *ngIf="!product.isAllowed || product.isDisabled" ><b> Status:</b> <span style="color: lightcoral;">Pending</span></p>
+      <!-- <p>Type: {{shop.group.name}}</p> -->
+      <p><b>Description: </b>{{product.description}}</p>
+      <p><b>Code:</b> {{product.productCode}} </p>
+      <p><b>Stock:</b> {{product.quantity}}</p>
+      <p><b>Unit:</b> {{product.unit}}</p>
+      <p><b>Weight:</b> {{product.weight}}</p>
+      <p><b>Price: </b>{{product.Price}}</p>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button routerLink = "add" color ="mytheme">
+      <ion-icon  name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab> -->
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  
+</ion-content>

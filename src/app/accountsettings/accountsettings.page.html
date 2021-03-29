@@ -1,0 +1,159 @@
+<!-- /**
+ * Shoppr - E-commerce app starter Ionic 4(https://www.enappd.com)
+ *
+ * Copyright © 2018-present Enappd. All rights reserved.
+ *
+ * This source code is licensed as per the terms found in the
+ * LICENSE.md file in the root directory of this source .
+ */ -->
+
+
+<ion-header>
+  <ion-toolbar color="mytheme">
+    <ion-buttons slot="start">
+        <ion-back-button color="light"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="light">Account Settings</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngIf="content === 'settings'" lines="none">
+    <div>
+      <ion-item (click)="updateContent('profile')">
+        <ion-row class="full">
+          <ion-col>
+            <ion-row>
+              <h4 class="medium" no-margin>Update Profile</h4>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+      <div class="sep"></div>
+    </div>
+    <div>
+      <ion-item (click)="open()">
+        <ion-row class="full">
+          <ion-col>
+            <ion-row>
+              <h4 class="medium" no-margin>Other Settings</h4>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+    </div>
+      <div class="sep"></div>
+  </ion-list>
+
+<!-- update profile section -->
+<div *ngIf="content === 'profile'">
+  
+<form [formGroup]="fg"> 
+  
+  <ion-item  padding color="mytheme" class="mybg head">
+    <ion-row class= "ion-justify-content-center" style="align-self: center;"  >
+      <ion-avatar *ngIf="!fg.value.UserImage">
+        <img  src="/assets/images/user.png"  (click)="UpdatePicture()">
+      </ion-avatar>
+      <ion-avatar *ngIf="fg.value.UserImage">  
+        <img [src]="resourceURL + fg.value.UserImage"  (click)="UpdatePicture()">
+      </ion-avatar>
+    </ion-row>
+  </ion-item>
+  <br><br>
+
+  <ion-row>
+    <ion-col>
+      <ion-label>First Name</ion-label>
+      <ion-input type="text" placeholder="First Name" formControlName="FirstName" class="input ion-padding-horizontal" ></ion-input>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.FirstName">
+          <div class="error-message"
+            *ngIf="fg.get('FirstName').hasError(validation.type) && (fg.get('FirstName').dirty || fg.get('FirstName').touched)">
+            <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+    </ion-col>
+    <ion-col>
+      <ion-label>Last Name</ion-label>
+      <ion-input type="text" placeholder="Last Name" formControlName="LastName" class="input ion-padding-horizontal" ></ion-input>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.lastName">
+          <div class="error-message"
+            *ngIf="fg.get('LastName').hasError(validation.type) && (fg.get('LastName').dirty || fg.get('LastName').touched)">
+            <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-label>Email</ion-label>
+      <ion-input class="ion-clearInput" type="email"  placeholder="Email" formControlName="Email_Address" class="input ion-padding-horizontal"></ion-input>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.email">
+          <div class="error-message"
+            *ngIf="fg.get('Email_Address').hasError(validation.type) && (fg.get('Email_Address').dirty || fg.get('Email_Address').touched)">
+            <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+    </ion-col>
+    <ion-col>
+      <ion-label>Mobile Number</ion-label>
+      <ion-input class="ion-clearInput" type="text"  placeholder="Mobile Number" formControlName="Contact_Number"  class="input ion-padding-horizontal"></ion-input>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.mobileNumber">
+          <div class="error-message"
+            *ngIf="fg.get('Contact_Number').hasError(validation.type) && (fg.get('Contact_Number').dirty || fg.get('Contact_Number').touched)">
+            <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-label>Password</ion-label>
+      <ion-input class="ion-clearInput" type="password" placeholder="Password" minLength="8" formControlName="Password" class="input ion-padding-horizontal" ></ion-input>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.Password">
+          <div class="error-message"
+          *ngIf="fg.get('Password').hasError(validation.type) && (fg.get('Password').dirty &&  fg.get('Password').minlength  || fg.get('Password').touched)">
+            <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-label>Address</ion-label>
+      <ion-input class="ion-clearInput" type="text" placeholder="Address" formControlName="Address" class="input ion-padding-horizontal" ></ion-input>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.Address">
+          <div class="error-message"
+            *ngIf="fg.get('Address').hasError(validation.type) && (fg.get('Address').dirty || fg.get('Address').touched)">
+            <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+    </ion-col>
+  </ion-row>
+  
+  <ion-row>
+    <ion-col>
+      <ion-button expand="block"  (click)="updateUser()" color="mycolor1" [disabled]="!fg.valid"><strong class="white">Update</strong></ion-button>
+    </ion-col>
+    <!-- <ion-col>
+      <ion-button expand="block" color="primary" color="mytheme" (click)="updateContent('settings')"><strong class="white">Cancel</strong></ion-button>
+    </ion-col> -->
+  </ion-row>
+</form>
+</div> 
+
+
+
+</ion-content>

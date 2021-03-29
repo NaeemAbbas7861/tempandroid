@@ -1,0 +1,41 @@
+<ion-header class="mybg">
+  <ion-toolbar color="mytheme">
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-title  class="ion-text-center" color="light">Products</ion-title>
+    <ion-buttons slot="end" >
+      <ion-back-button text="" color="light" icon="chevron-back-outline"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf = "product" class="ion-padding"  color="light">
+  <div>
+    <ion-searchbar  slot="start" placeholder="search Product" expand="full" style="position: static;" [(ngModel)]="searchQuery" (ionChange)="search()"></ion-searchbar>
+    </div>
+  <ion-card *ngFor= "let product of product">
+    <ion-item>
+    <ion-label ><b>{{product.title}}</b></ion-label>
+  </ion-item>
+  
+    <ion-card-content>
+      <!-- <p *ngIf="product.isAllowed && !product.isDisabled" >Status: <span style="color: green;">Active</span></p>
+      <p *ngIf="!product.isAllowed || product.isDisabled" >Status: <span style="color: lightcoral;">Pending</span></p> -->
+      <!-- <p>Type: {{shop.group.name}}</p> -->
+      <!-- <p>Description: {{product.description}}</p>
+      <p>Code: {{product.productCode}} </p> -->
+      <p>Product Code: {{product.productCode}}</p>
+      <p>Quantity: {{product.quantity}}</p>
+      <!-- <p>Unit: {{product.unit}}</p>
+      <p>Weight: {{product.weight}}</p> -->
+      <p>Price: {{product.price}}</p>
+    </ion-card-content>
+  </ion-card>
+
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  
+</ion-content>

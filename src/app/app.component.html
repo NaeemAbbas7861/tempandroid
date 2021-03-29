@@ -1,0 +1,174 @@
+<!-- /**
+ * Shoppr - E-commerce app starter Ionic 4(https://www.enappd.com)
+ *
+ * Copyright © 2018-present Enappd. All rights reserved.
+ *
+ * This source code is licensed as per the terms found in the
+ * LICENSE.md file in the root directory of this source .
+ */ -->
+
+<ion-app>
+  <ion-split-pane contentId="main">
+    <ion-menu type="push" contentId="main"> 
+      <ion-header>
+        <ion-toolbar color="mytheme">
+          <ion-row class="ion-padding-horizontal ion-align-items-center">
+            <ion-col size="3" class="ion-padding-vertical ion-align-items-center">
+
+              <ion-avatar *ngIf="!sharedservice.isloggedin" class="ion-margin-vertical">
+                <img src="../assets/images/user.png"> 
+              </ion-avatar>
+ 
+              <ion-avatar *ngIf="!sharedservice.user.UserImage && sharedservice.isloggedin" class="ion-margin-vertical" routerLink="accountsettings">
+                <img src="../assets/images/user.png"> 
+              </ion-avatar>
+
+              <ion-avatar *ngIf="sharedservice.user.UserImage && sharedservice.isloggedin" class="ion-margin-vertical" routerLink="accountsettings">
+                <img src="{{RESOURCE + sharedservice.user.UserImage}}"> 
+              </ion-avatar>
+            </ion-col>
+            <ion-col class="ion-padding-vertical ion-align-items-center">
+              <div class="ion-margin-vertical">
+                <h4  class="medium white ion-no-margin ion-margin-start"><strong>{{sharedservice.user.FirstName}}
+                    {{sharedservice.user.LastName}} </strong> </h4>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <ion-menu-toggle auto-hide="false" *ngFor="let p of sharedservice.appPages">
+          <ion-item detail="false" lines="none" [routerDirection]="'root'" [routerLink]="[p.url]" routerLinkActive #rla="routerLinkActive" [ngClass]="rla.isActive ? 'active' : 'notactive'" >
+            <ion-icon slot="start" [name]="p.icon" class="sidemenu-icon"></ion-icon>
+            <ion-label>
+              {{p.title}}
+              <!-- <ion-badge *ngIf="p.title == 'Shopping Cart'" color="danger" class="label-subtext">6</ion-badge>
+              
+              <span *ngIf="p.title == 'Wish Cash'" class="label-subtext">: <span class="mycolor">{{dataService.wish_cash.currency}}{{fun.calculate(dataService.wish_cash.amount,
+                  0)}}</span></span>
+              <span *ngIf="p.title == 'Rewards'" class="label-subtext">: <span class="mycolor">{{dataService.rewards.points}} Points</span></span> -->
+            </ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <div class="line"></div>
+         <ion-menu-toggle auto-hide="false"> 
+          <ion-item detail="false" lines="none" [routerDirection]="'root'" routerLink="/faqs" routerLinkActive #rla="routerLinkActive" [ngClass]="rla.isActive ? 'active' : 'notactive'">
+            <ion-icon slot="start"  size="medium" name="information-circle" class="sidemenu-icon"></ion-icon>
+            <ion-label>
+              About us
+            </ion-label>
+          </ion-item>
+         </ion-menu-toggle> 
+         <ion-menu-toggle auto-hide="false" *ngIf = "sharedservice.isloggedin"> 
+        <ion-item detail="false" lines="none" [routerDirection]="'root'" routerLink="/settings" routerLinkActive #rla="routerLinkActive" [ngClass]="rla.isActive ? 'active' : 'notactive'">
+          <ion-icon slot="start" name="settings-outline" class="sidemenu-icon"></ion-icon>
+          <ion-label>
+            Settings
+          </ion-label>
+        </ion-item>
+      </ion-menu-toggle> 
+      <ion-menu-toggle auto-hide="false" *ngIf = "!sharedservice.isloggedin"> 
+        <ion-item detail="false" lines="none" [routerDirection]="'root'" routerLink="/login">
+          <ion-icon slot="start" name="log-in-outline" class="sidemenu-icon"></ion-icon>
+          <ion-label>
+            Login
+          </ion-label>
+        </ion-item>
+      </ion-menu-toggle> 
+      <ion-menu-toggle auto-hide="false" *ngIf = "!sharedservice.isloggedin"> 
+        <ion-item detail="false" lines="none" [routerDirection]="'root'" routerLink="/signup">
+          <ion-icon slot="start" name="log-in-outline" class="sidemenu-icon"></ion-icon>
+          <ion-label>
+            Registration
+          </ion-label>
+        </ion-item>
+    </ion-menu-toggle> 
+      <ion-menu-toggle auto-hide="false" *ngIf = "sharedservice.isloggedin"> 
+        <ion-item detail="false" lines="none" [routerDirection]="'root'" (click)="logout()">
+          <ion-icon slot="start" name="log-out-outline" class="sidemenu-icon"></ion-icon>
+          <ion-label>
+            Logout
+          </ion-label>
+        </ion-item>
+      </ion-menu-toggle> 
+      </ion-content>
+    </ion-menu>
+    <ion-router-outlet  id="main"></ion-router-outlet>
+    <!-- <ion-menu side="end" type="overlay" #side >
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button color="dark" (click)="back()">
+              <ion-icon name="arrow-back" *ngIf="!side_open"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+          <ion-title color="dark">Refine</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <ion-list *ngIf="side_open">
+          <ion-item detail="true" (click)="menu(true)">
+            Color
+          </ion-item>
+          <ion-item detail="true" (click)="menu(false)">
+            Rating
+          </ion-item>
+        </ion-list>
+        <ion-list *ngIf="side_open1 && !side_open">
+          <ion-item detail="false" *ngFor="let c of colors">
+            <ion-label>{{c}}</ion-label>
+            <ion-checkbox slot="end"></ion-checkbox>
+          </ion-item>
+        </ion-list>
+        <ion-list *ngIf="!side_open1 && !side_open">
+          <ion-radio-group>
+            <ion-item detail="false">
+              <ion-label>
+                <ion-icon name="star" class="small-menu-icon ion-no-margin"></ion-icon>
+                <ion-icon name="star" class="small-menu-icon ion-no-margin"></ion-icon>
+                <ion-icon name="star" class="small-menu-icon ion-no-margin"></ion-icon>
+                <ion-icon name="star" class="small-menu-icon ion-no-margin"></ion-icon> & up
+              </ion-label>
+              <ion-radio slot="end"></ion-radio>
+            </ion-item>
+            <ion-item detail="false">
+              <ion-label>
+                <ion-icon name="star" class="small-menu-icon ion-no-margin" ></ion-icon>
+                <ion-icon name="star" class="small-menu-icon ion-no-margin" ></ion-icon>
+                <ion-icon name="star" class="small-menu-icon ion-no-margin" ></ion-icon> & up
+              </ion-label>
+              <ion-radio slot="end"></ion-radio>
+            </ion-item>
+            <ion-item detail="false">
+              <ion-label>
+                <ion-icon name="star" class="small-menu-icon ion-no-margin" ></ion-icon>
+                <ion-icon name="star" class="small-menu-icon ion-no-margin" ></ion-icon> & up
+              </ion-label>
+              <ion-radio slot="end"></ion-radio>
+            </ion-item>
+            <ion-item detail="false">
+              <ion-label>
+                <ion-icon name="star" class="small-menu-icon ion-no-margin" ></ion-icon> & up
+              </ion-label>
+              <ion-radio slot="end"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-list>
+      </ion-content>
+      <ion-footer class="ion-no-border">
+        <ion-row>
+          <ion-col size="6">
+            <ion-button color="medium" expand="block">
+              <h4  class="white medium ion-no-margin">Clear all</h4>
+            </ion-button>
+          </ion-col>
+          <ion-col size="6">
+            <ion-button color="mytheme" expand="block">
+              <h4   class="white medium ion-no-margin">Apply</h4>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-footer>
+    </ion-menu> -->
+  </ion-split-pane>
+</ion-app>

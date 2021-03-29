@@ -1,0 +1,111 @@
+<!-- /**
+ * Shoppr - E-commerce app starter Ionic 4(https://www.enappd.com)
+ *
+ * Copyright © 2018-present Enappd. All rights reserved.
+ *
+ * This source code is licensed as per the terms found in the
+ * LICENSE.md file in the root directory of this source .
+ */ -->
+
+ <ion-header>
+  <ion-toolbar color="mytheme">
+    <ion-buttons slot="start">
+      <ion-back-button color="light"></ion-back-button>
+    </ion-buttons>
+    <ion-title  color="light" class="ion-text-center">Billing</ion-title>
+    <!-- <ion-buttons slot="end" >
+      <ion-back-button text="" color="light" icon="chevron-back-outline"></ion-back-button>
+    </ion-buttons> -->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" color="light">
+  <ion-item style="min-height: 280px;">
+    <div #mapElement class="map" style="min-height: 300px; width: 100%;"></div>
+</ion-item>
+  <ion-grid>
+    <form [formGroup]="fg">
+      <ion-row>
+        <ion-col>
+          <ion-input type="text" placeholder="Delivery Address" [ngModelOptions]="{standalone: true}" [(ngModel)]="Delivery_Address" class="input ion-padding-horizontal" ></ion-input>
+          {{Delivery_Address}}
+        </ion-col>
+      </ion-row>
+      
+      <!-- <ion-row>
+        <ion-col>
+            <ion-list >
+              <ion-radio-group formControlName="IsSelfPick" (ionChange)="printvalue()">
+            <ion-list-header color="mytheme">
+              <ion-label>Select Delivery Method</ion-label>
+            </ion-list-header>
+
+            <ion-item>
+              <ion-label>Home Delivery</ion-label>
+              <ion-radio checked="selfpick" slot="start" value="false"></ion-radio>
+            </ion-item>
+
+            <ion-item>
+              <ion-label>Pick by Your Self</ion-label>
+              <ion-radio slot="start" value="true"></ion-radio>
+            </ion-item>
+          
+          </ion-radio-group>
+        </ion-list>
+        </ion-col>
+      </ion-row> -->
+    <!-- <ion-row *ngIf="selfpick">
+      <ion-col>
+        <ion-input type="text" placeholder="Rider Name" formControlName="RiderName" class="input ion-padding-horizontal" ></ion-input>
+      </ion-col>
+    </ion-row> -->
+    <!-- <ion-row *ngIf="selfpick">
+      <ion-col>
+        <ion-input type="text" placeholder="Rider Contact No." formControlName="RiderContactNo" class="input ion-padding-horizontal" ></ion-input>
+      </ion-col>
+      <ion-col>
+        <ion-input type="text" placeholder="Rider Vehicle No." formControlName="RiderVehicleNo" class="input ion-padding-horizontal" ></ion-input>
+      </ion-col>
+    </ion-row> -->
+   
+    <ion-row>
+      <ion-col>
+        <ion-input type="text" placeholder="Instructions" class="input ion-padding-horizontal" ></ion-input>
+      </ion-col>
+    </ion-row>
+    <ion-list>
+      <ion-radio-group formControlName="PayMentMethod">
+        <ion-list-header color="mycolor1">
+          <ion-label  class="input1 ion-padding-horizontal">Select payment method</ion-label>
+        </ion-list-header>
+        <ion-item  class="input ion-padding-horizontal">
+          <ion-radio  slot="start" value="1" size= "large" color="mytheme" checked></ion-radio>
+          <ion-label >
+            Jazzcash
+          </ion-label>
+        </ion-item>
+        <ion-item  class="input ion-padding-horizontal">
+          <ion-radio  slot="start" value="2" size= "large" color="mytheme" ></ion-radio>
+          <ion-label >
+            EasyPaisa
+          </ion-label>
+        </ion-item>
+        <!-- <ion-item>
+          <ion-label>
+            Jazz Cash
+          </ion-label>
+  
+          <ion-radio slot="start" value="0" checked></ion-radio>
+        </ion-item> -->
+      </ion-radio-group>
+    </ion-list>
+    </form>
+  </ion-grid>
+ 
+ 
+</ion-content>
+<ion-footer (click)="done()">
+  <ion-toolbar color="mycolor1">
+    <ion-title class="ion-text-center" [disabled]="!fg.valid">Done</ion-title>
+  </ion-toolbar>
+</ion-footer>

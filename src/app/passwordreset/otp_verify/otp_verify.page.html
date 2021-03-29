@@ -1,0 +1,70 @@
+<!-- /**
+ * Shoppr - E-commerce app starter Ionic 4(https://www.enappd.com)
+ *
+ * Copyright © 2018-present Enappd. All rights reserved.
+ *
+ * This source code is licensed as per the terms found in the
+ * LICENSE.md file in the root directory of this source .
+ */ -->
+
+<ion-header class="ion-padding" color="mytheme" class="mybg head">
+    <ion-toolbar color="mytheme">
+        <ion-buttons slot="start">
+          <ion-back-button color="light"></ion-back-button>
+        </ion-buttons>
+      </ion-toolbar>
+      <ion-row class="ion-justify-content-center ion-padding-bottom">
+        <ion-img src="assets/images/logo.png" class="head-image"></ion-img>
+      </ion-row>
+  </ion-header>
+
+
+
+<ion-content *ngIf = "otp" class="ion-padding">
+  <ion-text><h3  class="title ion-no-margin ion-margin-bottom ion-text-center">Verify your Account</h3></ion-text>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-label><ion-text class="small">Enter 4 digit OTP Number</ion-text></ion-label>
+        <!-- <ion-input  type="email" placeholder="Email" [(ngModel)]="email" class="input ion-clearInput ion-padding-horizontal" ></ion-input> -->
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-text-center">
+      <ion-col>
+       <ion-input #otp1 required maxLength="1" [(ngModel)]="otp5" (keyup)="otpController($event,otp2,'')">
+       </ion-input>
+       <ion-input #otp2 required maxLength="1" [(ngModel)]="otp6" (keyup)="otpController($event,otp3,otp1)">
+       </ion-input>
+       <ion-input #otp3 required maxLength="1" [(ngModel)]="otp7" (keyup)="otpController($event,otp4,otp2)">
+       </ion-input>
+       <ion-input #otp4  required maxLength="1" [(ngModel)]="otp8" (keyup)="otpController($event,'',otp3)">
+       </ion-input>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-button  expand="block" color="mycolor1" [disabled]="!otp5 || !otp6 || !otp7 || !otp8" (click)="verify()"><strong class="white">Confirm</strong></ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-content *ngIf="!otp"  class="ion-padding">
+  <ion-text><h3  class="title ion-no-margin ion-margin-bottom ion-text-center">Update Password</h3></ion-text>
+  
+  <ion-grid>
+    <ion-row>
+      <ion-label><ion-text class="ion-padding-horizontal">New Password</ion-text></ion-label> 
+    </ion-row>
+    <ion-row>
+        <ion-input class="ion-clearInput" type="New Password" placeholder="Password" [(ngModel)]="Password" class="input ion-padding-horizontal" style="height: 40px;" ></ion-input>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-button expand="block" color="mycolor1" (click)="UpdatePassword()"><strong class="white">Reset Password</strong></ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

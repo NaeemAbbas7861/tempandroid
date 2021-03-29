@@ -1,0 +1,52 @@
+.head {
+    min-height: 21vh !important;
+}
+.head-image {
+    background-size: contain;
+    padding-top: 20px;
+    width: 180px;
+    align-self: center;
+}
+.small {
+    a{
+        font-size: 13px;
+        text-decoration: unset !important;
+    }
+}
+.input {
+    background-color: rgb(240, 240, 240);
+    border: 1px solid rgb(235, 222, 42);
+    border-radius: 9px;
+    font-size: .9em !important;
+}
+.white{
+    color: white;
+}
+.title {
+    font-size: 18px;
+    color: white;
+}
+.title1 {
+    margin-left: 2%;
+    color: #000000
+}
+.title2 {
+    margin-left: 10px;
+    margin-top: 10px;
+    color: white;
+   
+}
+.logo {
+    width: 1.25em !important;
+}
+
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-left: 10px;
+    margin-top: 10px;
+  }
+  #bgcolor{
+      color: white;
+  }
+  

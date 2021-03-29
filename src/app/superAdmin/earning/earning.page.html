@@ -1,0 +1,40 @@
+<!-- /**
+ * Shoppr - E-commerce app starter Ionic 4(https://www.enappd.com)
+ *
+ * Copyright © 2018-present Enappd. All rights reserved.
+ *
+ * This source code is licensed as per the terms found in the
+ * LICENSE.md file in the root directory of this source .
+ */ -->
+
+<ion-header class="mybg">
+  <ion-toolbar color="mytheme">
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button> 
+    </ion-buttons>
+    <ion-title slot = "start" color="light">Earning Section</ion-title>
+    <ion-back-button  color="light" defaultHref="/" slot="end"> </ion-back-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <label  style="padding-left: 10%;">Date From</label>
+    <label style="padding-left: 10%">Date To</label>
+  <ion-item >
+    <ion-datetime displayFormat="DD, MM, YYYY" [min]="minDate" [max]="maxDate" [(ngModel)]="selectDateString" style="font-size: 14px;"></ion-datetime>
+    <ion-datetime displayFormat="DD, MM, YYYY" [min]="minDate" [max]="maxDate" [(ngModel)]="selectDateString1"  style="font-size: 14px;" ></ion-datetime>
+    <ion-button  slot="end" color="mycolor1" (click)="getEarning(selectDateString, selectDateString1)" size="small"  class="end11"><strong >Search</strong></ion-button>
+  </ion-item>
+        <ion-card *ngIf="earning">
+            <ion-item><ion-label> {{Month}} Earning </ion-label></ion-item>
+              <ion-card-content>
+                <p>Total Order Place: {{earning.totalOrders}}</p>
+                <p>Total Amount: {{earning.totalAmount}}</p>
+                <p>Shop Owner Amount: {{earning.shopAmount}}</p>
+                <p>Company Amount: {{earning.companyAmount}}</p>
+                <!-- <p>Shipment Charge: {{earning.companyAmount}}</p> -->
+              </ion-card-content>
+        </ion-card>
+      
+        <ion-button style="padding-left: 48%;" *ngIf="earning" color="mycolor1" (click)="DownloadEarningDatetoDate(selectDateString, selectDateString1)"><strong >Download Report</strong></ion-button>
+      </ion-content>

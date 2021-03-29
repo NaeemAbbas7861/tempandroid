@@ -1,0 +1,84 @@
+<!-- /**
+ * Shoppr - E-commerce app starter Ionic 4(https://www.enappd.com)
+ *
+ * Copyright © 2018-present Enappd. All rights reserved.
+ *
+ * This source code is licensed as per the terms found in the
+ * LICENSE.md file in the root directory of this source .
+ */ -->
+
+<ion-header padding color="mytheme" class="mybg head">
+  <ion-toolbar color="mytheme">
+    <ion-buttons slot="start">
+      <ion-back-button color="light"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-row class="ion-justify-content-center">
+    <ion-img src="assets/images/logo.png" class="head-image"></ion-img>
+  </ion-row>
+</ion-header>
+
+<ion-content class="ion-padding" >
+  <ion-text class="ion-text-center"><h3  class="title ion-no-margin ion-margin-bottom ion-text-center">Sign In</h3></ion-text>
+  <ion-grid>
+    <form [formGroup]="fg">
+    <ion-row>
+      <ion-col>
+        <ion-input class="ion-clearInput" type="email" placeholder="Email" formControlName="Email_Address" class="input ion-padding-horizontal" ></ion-input>
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_messages.Email_Address">
+            <div class="error-message"
+              *ngIf="fg.get('Email_Address').hasError(validation.type) && (fg.get('Email_Address').dirty || fg.get('Email_Address').touched)">
+              <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-input class="ion-clearInput" type="password" placeholder="Password" formControlName="Password" class="input ion-padding-horizontal" ></ion-input>
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_messages.Password">
+            <div class="error-message"
+              *ngIf="fg.get('Password').hasError(validation.type) && (fg.get('Password').dirty &&  fg.get('Password').minlength  || fg.get('Password').touched)">
+              <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-text class="ion-float-right" color="medium" (click)="fun.navigate('passwordreset', true)"><h6  class="small ion-no-margin ion-text-end">Forgot Password?</h6></ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-button expand="block" (click)="signin()" color="mycolor1" [disabled]="!fg.valid"><strong class="white">Sign In</strong></ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
+     
+    <!-- <ion-row>
+      <ion-col>
+        <ion-button expand="block" fill="outline" color="fb" class="ion-no-padding"><ion-img src="assets/images/facebook_logo.png" slot="start" class="logo ion-margin-end" ></ion-img>Facebook</ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button expand="block" color="light ion-no-padding" ><ion-img src="assets/images/google_logo.png" slot="start" class="logo ion-margin-end" ></ion-img>Google</ion-button>
+      </ion-col>
+    </ion-row>  -->
+    <ion-row>
+      <ion-col>
+        <ion-button expand="block" fill="outline" color="primary" (click)="fun.navigate('signup')" color="mytheme"><strong>New? Create an Account</strong></ion-button>
+      </ion-col>
+    </ion-row>
+    <!-- <div class="line ion-margin"></div> -->
+    <ion-row>
+      <ion-col>
+        <ion-text class="ion-text-center" color="medium"><h6  class="small ion-no-margin"><a (click)="termsOfUse()">Terms and Conditions</a></h6></ion-text>
+       
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

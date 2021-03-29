@@ -1,0 +1,193 @@
+<!-- /**
+ * Shoppr - E-commerce app starter Ionic 4(https://www.enappd.com)
+ *
+ * Copyright © 2018-present Enappd. All rights reserved.
+ *
+ * This source code is licensed as per the terms found in the
+ * LICENSE.md file in the root directory of this source .
+ */ -->
+
+ <ion-header padding color="mytheme" class="mybg head">
+  <ion-toolbar color="mytheme">
+    <ion-buttons slot="start">
+      <ion-back-button color="light"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-row class= "ion-justify-content-center"> 
+    <ion-img src="assets/images/logo.png" class="head-image" ></ion-img>
+  </ion-row>
+</ion-header>
+
+<ion-content class="ion-padding ">
+  <ion-text><h3  class="title ion-no-margin ion-margin-bottom ion-text-center">Sign Up</h3></ion-text>
+
+  <ion-grid>
+    <form [formGroup]="fg">
+    <ion-row>
+      <ion-col>
+        <ion-label class="title1">First Name</ion-label>
+        <ion-input type="text"  formControlName="FirstName" class="input ion-padding-horizontal"></ion-input>
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_messages.FirstName">
+            <div class="error-message"
+              *ngIf="fg.get('FirstName').hasError(validation.type) && (fg.get('FirstName').dirty || fg.get('FirstName').touched)">
+              <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+      </ion-col>
+      <ion-col>
+        <ion-label class="title1">Last Name</ion-label>
+        <ion-input type="text" formControlName="LastName" class="input ion-padding-horizontal" ></ion-input>
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_messages.lastName">
+            <div class="error-message"
+              *ngIf="fg.get('LastName').hasError(validation.type) && (fg.get('LastName').dirty || fg.get('LastName').touched)">
+              <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+      </ion-col>
+    </ion-row>
+  
+    <ion-row>
+      <ion-col>
+        <ion-label class="title1">Email</ion-label>
+        <ion-input class="ion-clearInput" type="email" formControlName="Email_Address" class="input ion-padding-horizontal"></ion-input>
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_messages.email">
+            <div class="error-message"
+              *ngIf="fg.get('Email_Address').hasError(validation.type) && (fg.get('Email_Address').dirty || fg.get('Email_Address').touched)">
+              <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+      </ion-col>
+      <ion-col>
+        <ion-label class="title1">Contact Number</ion-label>
+        <ion-input class="ion-clearInput" type="text" formControlName="Contact_Number"  class="input ion-padding-horizontal"></ion-input>
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_messages.mobileNumber">
+            <div class="error-message"
+              *ngIf="fg.get('Contact_Number').hasError(validation.type) && (fg.get('Contact_Number').dirty || fg.get('Contact_Number').touched)">
+              <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-label class="title1">Password</ion-label>
+        <ion-input class="ion-clearInput" type="password" formControlName="Password" class="input ion-padding-horizontal" minLength="8" ></ion-input>
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_messages.Password">
+            <div class="error-message"
+              *ngIf="fg.get('Password').hasError(validation.type) && (fg.get('Password').dirty &&  fg.get('Password').minlength  || fg.get('Password').touched)">
+              <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-label class="title1">Address</ion-label>
+        <ion-input class="ion-clearInput" type="text" formControlName="Address" class="input ion-padding-horizontal" ></ion-input>
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_messages.Address">
+            <div class="error-message"
+              *ngIf="fg.get('Address').hasError(validation.type) && (fg.get('Address').dirty || fg.get('Address').touched)">
+              <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col ><ion-label class="title1" > Account Type</ion-label> </ion-col>
+    </ion-row>
+    <ion-row>
+      
+      <!-- <ion-col> <ion-input class="ion-clearInput" type="text" placeholder="Type" class="input ion-padding-horizontal" disabled ></ion-input></ion-col> -->
+      <ion-col>
+        
+       <ion-select (ngModelChange)="checkCNIC()" formControlName="RoleId" class="input ion-clearInput ion-padding-horizontal">
+         <ion-select-option  value="2">Shop Owner</ion-select-option>
+         <ion-select-option  value="3">Customer </ion-select-option>
+         <ion-select-option  value="4">Rider</ion-select-option>
+       </ion-select>
+       <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.Type">
+          <div class="error-message"
+            *ngIf="fg.get('RoleId').hasError(validation.type) && (fg.get('RoleId').dirty || fg.get('RoleId').touched)">
+            <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="fg.value.RoleId == 2 || fg.value.RoleId == 4">
+      <ion-col>
+        <ion-label class="title1">CNIC</ion-label>
+        <ion-input class="ion-clearInput" type="number" placeholder="CNIC" formControlName="CNIC" class="input ion-padding-horizontal" ></ion-input>
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_messages.CNIC">
+            <div class="error-message"
+              *ngIf="fg.get('CNIC').hasError(validation.type) && (fg.get('CNIC').dirty || fg.get('CNIC').touched)">
+              <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+      </ion-col>
+    </ion-row>
+   
+    <ion-row *ngIf="fg.value.RoleId == 2 || fg.value.RoleId == 4">
+      <ion-col>
+        <p *ngIf="uploading" class="title1">Uploading Image.<ion-spinner color="primary"></ion-spinner></p>
+        <ion-img *ngIf="fg.value.CNIC_Image" [src]="resourceURL + fg.value.CNIC_Image" alt="CNIC_Image" ></ion-img>
+      </ion-col>
+      <ion-col>
+  <ion-button expand="block"   color="mytheme" (click)="uploadCnic()"><strong class="white ion-text-capitalize">CNIC image</strong></ion-button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+          <ion-checkbox name="Terms"  checked="false" [(ngModel)]="terms" [ngModelOptions]="{standalone: true}" class="titl"></ion-checkbox>
+          <ion-label class="ion-text-center"  color="warning" class="title1" > I agree <a (click)="termsOfUse()"> Terms and Conditions </a> </ion-label>
+
+      </ion-col>
+    </ion-row>
+
+
+
+    <ion-row>
+      <ion-col>
+        <ion-button expand="block"  (click)="signup()" color="mycolor1" [disabled]="!fg.valid || !terms"><strong class="white">Create an Account</strong></ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
+    <!-- <div class="line"></div> -->
+    <!-- <ion-row>
+      <ion-col>
+        <ion-button expand="block" fill="outline" color="fb"><ion-img src="assets/images/facebook_logo.png" slot="start" class="logo ion-margin-end" ></ion-img>Facebook</ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button expand="block" color="light"><ion-img src="assets/images/google_logo.png" slot="start" class="logo ion-margin-end" ></ion-img>Google</ion-button>
+      </ion-col>
+    </ion-row> -->
+    <ion-row>
+      <ion-col>
+        <ion-button expand="block" fill="outline" color="mytheme" (click)="fun.navigate('login')"><strong>Have an account? Sign in</strong></ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <!-- <ion-text class="ion-text-center"  color="medium"><h6  class="small ion-no-margin"><a (click)="open_modal(true)">Terms of Use</a> and <a (click)="open_modal(false)">Privacy Policy</a></h6></ion-text> -->
+        
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

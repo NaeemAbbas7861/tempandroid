@@ -1,0 +1,65 @@
+<ion-header class="mybg">
+  <ion-toolbar color="mytheme">
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center" color="light">Order Items</ion-title>
+
+  <ion-buttons slot="end" >
+    <ion-back-button text="" color="light" icon="chevron-back-outline"></ion-back-button>
+  </ion-buttons>
+</ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding ion-text-center"  >
+<ion-card>
+  <table *ngIf = "items" color="light">
+    <tr>
+      <th>Product</th>
+      <th>Quantity</th>
+    </tr>
+    <tr *ngFor= "let item of items.orderItems">
+      <td>{{item.product.title}}</td>
+      <td>{{item.quantity}}</td>
+    </tr>
+  </table>
+</ion-card>
+<div style="min-height: 300px;" color="light">
+  <div #mapElement class="map" style="min-height: 300px;"></div>
+</div>
+
+
+    <ion-card *ngIf = "items">
+      <ion-item>
+        Customer Details
+      </ion-item>
+      <ion-card-content>
+        <p> Name: {{items.user.firstName}} {{items.user.lastName}} </p>
+        <p> Contact: 0{{items.user.contact_Number}}</p>
+        <p>Delivery Address: {{items.delieveryAddress}}</p>
+      </ion-card-content>
+    </ion-card>
+    <ion-card *ngIf = "items">
+      <ion-item>
+        Shop Details
+      </ion-item>
+      <ion-card-content>
+        <p> Name: {{items.shop.name}} </p>
+        <p> Contact: {{items.shop.contact}}</p>
+        <p> Address: {{items.shop.address}}</p>
+      </ion-card-content>
+    </ion-card>
+    
+    <ion-card *ngIf = "type == 'pending'" class="input1">
+      <ion-card-content>
+      <ion-label><h3 class="small">Enter Customer Verification Code</h3></ion-label>
+      <ion-input [(ngModel)]="Verification" type="text" name="Verification" placeholder="Enter Verification code" class="input ion-padding-horizontal" ></ion-input>
+      <ion-button  class="ion-padding" color="mycolor1" (click)="CompleteOrder(items.id ,Verification ,2)">Complete</ion-button>
+     <ion-button  class="ion-padding" color="mycolor1" (click)="presentAlertConfirm()" > Cancel</ion-button>
+      </ion-card-content>
+  </ion-card>
+    <!-- <ion-button *ngIf = "type == 'new'" class="ion-padding" color="mycolor1" (click)="acceptOrder(items.id , 1)">Accept Order</ion-button> -->
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+</ion-content>

@@ -1,0 +1,87 @@
+<!-- /**
+ * Shoppr - E-commerce app starter Ionic 4(https://www.enappd.com)
+ *
+ * Copyright © 2018-present Enappd. All rights reserved.
+ *
+ * This source code is licensed as per the terms found in the
+ * LICENSE.md file in the root directory of this source .
+ */ -->
+
+ <ion-header class="mybg">
+  <ion-toolbar color="mytheme">
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="end" >
+      <ion-back-button text="" color="light" icon="chevron-back-outline"></ion-back-button>
+    </ion-buttons>
+    <ion-title  color="light" class="ion-text-center">Add Category</ion-title>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-text><h3  class="title ion-no-margin ion-margin-bottom ion-text-center">Add Category</h3></ion-text>
+ 
+  <ion-grid >
+  <form [formGroup]="fg">
+  <ion-row >
+    <ion-col>
+      <ion-input type="text" placeholder="Name"  formControlName="Name" class="input ion-padding-horizontal" ></ion-input>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.Name">
+          <div class="error-message"
+            *ngIf="fg.get('Name').hasError(validation.type) && (fg.get('Name').dirty || fg.get('Name').touched)">
+            <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+    </ion-col>
+  </ion-row>
+  <!-- <ion-row class="ion-padding-vertical">
+    <ion-col>
+      <ion-input type="text" placeholder="Description" formControlName="Description" class="input ion-padding-horizontal" ></ion-input>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.Description">
+          <div class="error-message"
+            *ngIf="fg.get('Description').hasError(validation.type) && (fg.get('Description').dirty || fg.get('Description').touched)">
+            <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+    </ion-col>
+  </ion-row> -->
+  <!-- <ion-row class="ion-align-items-center">
+   <ion-col>
+    <input type="file" id="banner" name="banner" #banner placeholder="Choose file" (change)="uploadBanner(banner.files)"
+    style="display:none;" accept=".jpg, .jpeg, .png, .gif">
+      <ion-button expand="block"   color="mytheme" (click)="banner.click()"><strong class="white ion-text-capitalize">Banner</strong></ion-button>
+    </ion-col>
+    <ion-col>
+      <input type="file" id="logo" name="logo" #logo placeholder="Choose file" (change)="uploadThumbnail(logo.files)"
+                style="display:none;" accept=".jpg, .jpeg, .png, .gif">
+      <ion-button expand="block"   color="mytheme" (click)="logo.click()"><strong class="white ion-text-capitalize">Thumbnail</strong></ion-button>
+      
+      <ngb-progressbar class="top-15" *ngIf="uploadProgress > 0 && uploadProgress < 99" type="success"
+        [value]="uploadProgress">{{uploadProgress}}</ngb-progressbar>
+    </ion-col>
+  </ion-row> -->
+  <!-- <ion-row>
+    <ion-col>
+      <ion-img *ngIf="fg.value.Banner" [src]="resourceURL + fg.value.Banner" alt="Banner Image"></ion-img>
+    </ion-col>
+    <ion-col>
+      <ion-img *ngIf="fg.value.Thumbnail" [src]="resourceURL + fg.value.Thumbnail" alt="Thumbnail Image"></ion-img>
+    </ion-col>
+  </ion-row> -->
+  <ion-row>
+    <ion-col>
+      <ion-button expand="block" color="primary" (click)="AddGroup()" [disabled]="!fg.valid" color="mycolor1"><strong class="white">Add</strong></ion-button>
+    </ion-col>
+  </ion-row>
+
+  </form>
+  
+</ion-grid>
+
+</ion-content>

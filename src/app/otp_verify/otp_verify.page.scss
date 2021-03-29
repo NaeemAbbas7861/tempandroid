@@ -1,0 +1,36 @@
+.head {
+    min-height: 21vh !important;
+}
+.head-image {
+    background-size: contain;
+    width: 180px;
+    align-self: center;
+}
+.small {
+    font-size: 13px;
+}
+.white {
+    color: white;
+}
+.input {
+    background-color: rgb(240, 240, 240);
+    border: 1px solid rgb(210, 210, 210);
+    border-radius: 9px;
+    font-size: .9em !important;
+}
+.title {
+    font-size: 18px;
+}
+ion-input{
+    display:inline-block;
+    width:50px;
+    height:50px;
+    margin:10px;
+    border-radius: 50%;
+    --background:#e1e1e1;
+    --padding-start:7px;
+    }
+    .settimer{
+        padding-left: 30px;
+        font-size: large;
+    }

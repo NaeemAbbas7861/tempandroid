@@ -1,0 +1,71 @@
+<!-- /**
+ * Shoppr - E-commerce app starter Ionic 4(https://www.enappd.com)
+ *
+ * Copyright © 2018-present Enappd. All rights reserved.
+ *
+ * This source code is licensed as per the terms found in the
+ * LICENSE.md file in the root directory of this source .
+ */ -->
+
+<ion-header class="mybg">
+  <ion-toolbar color="mytheme">
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="fun.navigate('cart')">
+        <ion-icon name="cart" slot="icon-only" color="light" class="white top-btn ion-no-margin"></ion-icon>
+      </ion-button>
+      <!-- <ion-button (click)="side_open()">
+        <ion-icon name="switch" slot="icon-only" *ngIf="segment!=data[1].title"  class="white top-btn ion-no-margin"></ion-icon>
+      </ion-button> -->
+    </ion-buttons>
+    <ion-title class="ion-text-center" color="light">Home</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<div *ngIf = "location">
+  <ion-searchbar  placeholder="Search Shop" expand="full"  [(ngModel)]="searchQuery" (ionChange)="search()"></ion-searchbar>
+</div>
+
+<ion-content *ngIf = "location" class="ion-justify-content-center">
+  
+  <ion-select [(ngModel)]="groupid" placeholder="All Shops" (ngModelChange)="getShops(groupid,Latitude,Longitude)">
+    <ion-select-option *ngFor="let group of groups" [value]="group.id" >{{group.name}}</ion-select-option>
+  </ion-select>
+
+  <ion-card *ngFor="let shop of shops">  
+    <div *ngIf="shop.isInRange" routerLink="/shopproducts/{{shop.id}}">
+      <ion-img *ngIf="shop.logo" style="height: 220px; width: 100%; "  src= "{{env.RESOURCE_URL}}{{shop.logo}}" ></ion-img>
+       <ion-img *ngIf="!shop.logo" style="width: 100%; " src='../../assets/images/noimage.jpg'></ion-img> 
+    <ion-card-content>
+      <ion-card-title>{{shop.name}} </ion-card-title>
+    </ion-card-content>
+    </div>
+   
+    <div *ngIf="!shop.isInRange">
+      <ion-img *ngIf="shop.logo" style="width: 100%; " src= "{{env.RESOURCE_URL}}{{shop.logo}}" ></ion-img>
+       <ion-img *ngIf="!shop.logo" style="width: 100%; " src='../../assets/images/noimage.jpg'></ion-img> 
+    <ion-card-content>
+      <ion-card-title>{{shop.name}} </ion-card-title>
+      <span>(out of range)</span>
+    </ion-card-content>
+    </div>
+  </ion-card>
+  
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+</ion-content>
+
+<div *ngIf="NotFound">
+  <ion-text  class="mid ion-justify-content-center"  > No Shops found matching your filter</ion-text>
+</div>
+
+
+<div class="ion-text-center ion-padding" *ngIf = "!location">
+  <p>Error in Loading Location <br> Kindly Enable your Gps and Try again</p>
+    <ion-icon size="large" name="reload-outline" (click)="ionViewDidEnter()"></ion-icon>
+  </div>

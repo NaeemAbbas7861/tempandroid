@@ -1,0 +1,56 @@
+<ion-header class="mybg">
+  <ion-toolbar color="mytheme">
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="end" >
+      <ion-back-button text="" color="light" icon="chevron-back-outline"></ion-back-button>
+    </ion-buttons>
+    <ion-title  color="light" class="ion-text-center">Return Item</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="ion-padding">
+  <ion-text><h3  class="title ion-no-margin ion-margin-bottom ion-text-center">ADMIN RETURN PRODUCT</h3></ion-text>
+ 
+  <ion-grid >
+  <form [formGroup]="fg">
+  <ion-row >
+    <ion-col>
+      <ion-input type="text" placeholder="Brand Name"  formControlName="Name" class="input ion-padding-horizontal" ></ion-input>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.BrandName">
+          <div class="error-message"
+            *ngIf="fg.get('Name').hasError(validation.type) && (fg.get('Name').dirty || fg.get('Name').touched)">
+            <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+    </ion-col>
+  </ion-row>
+  <ion-row >
+    <ion-col>
+      <ion-input type="number" placeholder="Price"  formControlName="Price" class="input ion-padding-horizontal" ></ion-input>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.Price">
+          <div class="error-message"
+            *ngIf="fg.get('Price').hasError(validation.type) && (fg.get('Price').dirty || fg.get('Price').touched)">
+            <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <ion-button expand="block" color="primary" (click)="AddReturnProduct()" [disabled]="!fg.valid" color="mycolor1"><strong class="white">Add</strong></ion-button>
+    </ion-col>
+  </ion-row>
+
+  </form>
+  
+</ion-grid>
+
+</ion-content>

@@ -1,0 +1,57 @@
+<ion-header class="mybg">
+  <ion-toolbar color="mytheme">
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center" color="light">Shops</ion-title>
+    <ion-back-button  color="light" defaultHref="/" slot="end"> </ion-back-button>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content class="ion-padding">
+<div *ngIf = "shops">
+  <ion-card *ngFor= "let shop of shops">
+    <ion-item>
+    <ion-label><b>{{shop.name}}</b></ion-label>
+    <ion-icon slot ="end" name="cash-outline" routerLink = "/superadmin/{{shop.id}}/shopearning"  color="mycolor1"></ion-icon>
+    <ion-icon slot ="end" name="pencil-outline" routerLink = "edit/{{shop.id}}" color="mycolor1"></ion-icon>
+    <ion-button *ngIf="shop.isVerified"   routerLink = "{{shop.id}}/product" style="color: rgb(255, 255, 255); "color="mycolor1">Products</ion-button>
+    <ion-button *ngIf="!shop.isVerified"  color="mycolor1" disabled>Products</ion-button>
+  </ion-item>
+  
+    <ion-card-content>
+      <p *ngIf="shop.isVerified" >Status: <span style="color: green;">Active</span></p>
+      <p *ngIf="!shop.isVerified" >Status: <span style="color: lightcoral;">Pending</span></p>
+      <p>Category: {{shop.group.name}}</p>
+      <p>Number: {{shop.contact}}</p>
+      <p>NTN NO: {{shop.ndN_Number}}</p>
+      <!-- <p>Owner CNIC: {{shop.ownerCNIC}} </p>
+      <p>NDN No: {{shop.ndN_Number}}</p>
+      <p>latitude: {{shop.latitude}}</p>
+      <p>longitude: {{shop.longitude}}</p> -->
+      <p>Address: {{shop.address}}</p>
+    </ion-card-content>
+  </ion-card>
+</div>
+<div class="ion-text-center ion-padding-top" *ngIf = "!load">
+<p>Error in Loading Shops</p>
+  <ion-icon size="large" name="reload-outline" (click)="ngOnInit()"></ion-icon>
+</div>
+
+<div class="ion-text-center ion-padding-top" *ngIf = "Nodata">
+  <p>No Shop Found</p>
+    
+  </div>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button routerLink = "add" color ="mycolor1">
+      <ion-icon  name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  
+  
+</ion-content>

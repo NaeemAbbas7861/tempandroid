@@ -1,0 +1,210 @@
+<!-- /**
+ * Shoppr - E-commerce app starter Ionic 4(https://www.enappd.com)
+ *
+ * Copyright © 2018-present Enappd. All rights reserved.
+ *
+ * This source code is licensed as per the terms found in the
+ * LICENSE.md file in the root directory of this source .
+ */ -->
+
+<ion-header class="mybg">
+  <ion-toolbar color="mytheme">
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center" color="light"> Add Product</ion-title>
+    <ion-buttons slot="end" >
+      <ion-back-button text="" color="light" icon="chevron-back-outline"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <ion-grid>
+  <form [formGroup]="fg">
+  <ion-row >
+    <ion-col>
+  
+      <ion-label for="Title" position="floating">Product Name</ion-label>
+      <ion-input type="text" placeholder="Product Name" formControlName="Title" class="input ion-padding-horizontal" ></ion-input>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.Name">
+          <div class="error-message"
+            *ngIf="fg.get('Title').hasError(validation.type) && (fg.get('Title').dirty || fg.get('Title').touched)">
+            <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+    </ion-col>
+  </ion-row>
+ 
+  <ion-row class="ion-padding-vertical">
+    <ion-col>
+      <ion-label position="floating"  >Description</ion-label>
+      <ion-input type="text" placeholder="Description must be 100 character" formControlName="Description" class="input ion-padding-horizontal" minlength="100"  ></ion-input>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.Description">
+          <div class="error-message"
+            *ngIf="fg.get('Description').hasError(validation.type) && (fg.get('Description').dirty && fg.get('Description').minlength  ||  fg.get('Description').touched)">
+            <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+          </div>
+         
+        </ng-container>
+      </div>
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="ion-padding-vertical">
+    <ion-col>
+      <ion-label  position="floating">Product Code</ion-label>
+      <ion-input type="text" placeholder="ProductCode" formControlName="ProductCode" class="input ion-padding-horizontal" ></ion-input>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.ProductCode">
+          <div class="error-message"
+            *ngIf="fg.get('ProductCode').hasError(validation.type) && (fg.get('ProductCode').dirty || fg.get('ProductCode').touched)">
+            <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="ion-padding-vertical">
+    <ion-col>
+      <ion-label  position="floating" >Price</ion-label>
+      <ion-input type="number" min="0" placeholder="Price"  formControlName="Price" class="input ion-padding-horizontal" oninput="this.value = Math.abs(this.value)" required ></ion-input>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.Price">
+          <div class="error-message"
+            *ngIf="fg.get('Price').hasError(validation.type) && (fg.get('Price').dirty || fg.get('Price').touched)">
+            <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+    </ion-col>
+    <ion-col>
+      <ion-label  position="floating">Discount(%)</ion-label>
+      <ion-input type="number" placeholder="Discount (optional)"  min="0"  formControlName="Discount" class="input ion-padding-horizontal" ></ion-input>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.Discount">
+          <div class="error-message"
+            *ngIf="fg.get('Discount').hasError(validation.type) && (fg.get('Discount').dirty &&  fg.get('Discount').max || fg.get('Discount').touched)">
+            <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+    </ion-col>
+  </ion-row>
+ 
+  <ion-row class="ion-padding-vertical"> 
+    <ion-col>
+      <ion-label  position="floating">Quantity</ion-label>
+      <ion-input type="number" placeholder="Stock" min="0" formControlName="Quantity" class="input ion-padding-horizontal" oninput="this.value = Math.abs(this.value)" required ></ion-input>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.ProductCode">
+          <div class="error-message"
+            *ngIf="fg.get('Quantity').hasError(validation.type) && (fg.get('Quantity').dirty || fg.get('Quantity').touched)">
+            <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+    </ion-col>
+    <ion-col>
+      <ion-label  position="floating">Weight</ion-label>
+      <ion-input type="number" placeholder="Weight (optional)" min="0" formControlName="Weight" class="input ion-padding-horizontal"  oninput="this.value = Math.abs(this.value)"  ></ion-input>
+    </ion-col>
+  </ion-row>
+  <ion-row class="ion-padding-vertical">
+    <!-- <ion-col>
+      <ion-label  position="floating">Unit</ion-label>
+      <ion-input type="text" placeholder="if available kg,m" formControlName="Unit" class="input ion-padding-horizontal" pattern="[A-Za-z]+" ></ion-input>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.Unit">
+          <div class="error-message"
+            *ngIf="fg.get('Unit').hasError(validation.type)  && (fg.get('Unit').dirty   && fg.get('Unit').pattern  || fg.get('Unit').touched)">
+            <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+    </ion-col> -->
+    <ion-col>
+          <ion-label  position="floating">Unit</ion-label>
+          <ion-select value="Kilogram" formControlName="Unit"  class="input ion-padding-horizontal">
+            <ion-select-option value="Kilogram">Kilogram</ion-select-option>
+            <ion-select-option value="Meter"> Meter</ion-select-option>
+            <ion-select-option value="Liter"> Liter</ion-select-option>
+            <ion-select-option value="Ampere">Ampere</ion-select-option>
+            <ion-select-option value="Other">Other</ion-select-option>
+          </ion-select>
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of validation_messages.Unit">
+              <div class="error-message"
+                *ngIf="fg.get('Unit').hasError(validation.type)  && (fg.get('Unit').dirty   && fg.get('Unit').pattern  || fg.get('Unit').touched)">
+                <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+              </div>
+            </ng-container>
+          </div>
+    </ion-col>
+    <ion-col>
+      <ion-label  position="floating">Dimension</ion-label>
+      <ion-input type="text" placeholder="Dimension (optional)" formControlName="Dimension" class="input ion-padding-horizontal" ></ion-input>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-item>
+      <ion-label position="floating">Group</ion-label>
+     <ion-select [(ngModel)]="classification" [ngModelOptions]="{standalone: true}" (ionChange)="output()">
+       <ion-select-option *ngFor ="let cat of categorys" [value]="cat">{{cat.name}}</ion-select-option>
+     </ion-select>
+    </ion-item>
+    </ion-col>
+
+    <ion-col>
+      <ion-item>
+      <ion-label position="floating">Brand </ion-label>
+     <ion-select formControlName="ClassificationId">
+       <ion-select-option *ngFor ="let cat of classification.classifications" [value]="cat.id">{{cat.name}}</ion-select-option>
+     </ion-select>
+    </ion-item>
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of validation_messages.ClassificationId">
+        <div class="error-message"
+          *ngIf="fg.get('ClassificationId').hasError(validation.type) && (fg.get('ClassificationId').dirty || fg.get('ClassificationId').touched)">
+          <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+    </ion-col>
+  </ion-row>
+  <ion-row class="ion-align-items-center">
+   <ion-col>
+      <ion-button expand="block"   color="mycolor1" (click)=uploadPhoto()><strong class="white ion-text-capitalize">Add Image</strong></ion-button>
+    </ion-col>
+  </ion-row>
+  <ion-spinner  class="ion-justify-content-center" *ngIf="uploading" color="primary"></ion-spinner>
+  <ion-slides  *ngIf = "Images" pager="true" [options]="slideOpts" >
+    <ion-slide *ngFor="let i of Images; let v = index">
+      <ion-img class="image" [src]="resourceURL + i.path"  ></ion-img>
+      <button  expand="block" size="large"  style="height: 30px; width: 80px; font-size: medium; font-style: initial; color: mycolor1;" color="mycolor1" (click)="deleteImage(v)">X</button>
+      <!-- <div class="product-image-overlay"></div> -->
+    </ion-slide>
+  </ion-slides>
+  
+
+  <!-- <ion-row >
+    <ion-col>
+      <ion-label></ion-label>
+    </ion-col>
+  </ion-row>
+ -->
+  <ion-row>
+    <ion-col>
+      <ion-button [disabled]="!fg.valid"  expand="block"  (click)="AddProduct()" color="mycolor1"><strong class="white">Add</strong></ion-button>
+    </ion-col>
+  </ion-row>
+  </form>
+</ion-grid>
+</ion-content>

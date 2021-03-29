@@ -1,0 +1,56 @@
+
+<ion-header class="mybg">
+  <ion-toolbar color="mytheme">
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center" color="light">Product</ion-title>
+    <ion-buttons slot="end" >
+      <ion-back-button text="" color="light" icon="chevron-back-outline"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+</ion-header>
+<ion-searchbar *ngIf="shopproducts >= '5'" slot="start" placeholder="Search..." expand="full"  [(ngModel)]="searchQuery" (ionChange)="search()"></ion-searchbar>
+
+<ion-content *ngIf = "shop" class="ion-padding"  color="light">
+
+  <ion-card *ngFor= "let product of shop.products">
+    <ion-item>
+    <ion-label ><b>{{product.title}}</b></ion-label>
+    <ion-icon slot ="end" color ="mycolor1" name="eye" (click) = "preview(product.id)" ></ion-icon>
+    <ion-icon slot ="end" color ="mycolor1" name="trash" (click) = "DeleteProduct(product.id)" ></ion-icon>
+    <ion-icon slot ="end" color ="mycolor1" name="pencil-outline" routerLink = "{{shop.groupId}}/edit/{{product.id}}" ></ion-icon>
+  </ion-item>
+  
+    <ion-card-content>
+      <!-- <p *ngIf="product.isAllowed && !product.isDisabled" >Status: <span style="color: green;">Active</span></p>
+      <p *ngIf="!product.isAllowed || product.isDisabled" >Status: <span style="color: lightcoral;">Pending</span></p> -->
+      <!-- <p>Type: {{shop.group.name}}</p> -->
+      <!-- <p>Description: {{product.description}}</p>
+      <p>Code: {{product.productCode}} </p> -->
+      <p>Product Code: {{product.productCode}}</p>
+      <p>Quantity: {{product.quantity}}</p>
+      <!-- <p>Unit: {{product.unit}}</p>
+      <p>Weight: {{product.weight}}</p> -->
+      <p>Price: {{product.price}}</p>
+    </ion-card-content>
+  </ion-card>
+
+  <div *ngIf="NotShopFound">
+    <ion-text  class="mid ion-justify-content-center" > No products found</ion-text>
+  </div>  
+  
+  <ion-fab *ngIf = "shop" vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button routerLink = "{{shop.groupId}}/add" color ="mycolor1">
+      <ion-icon  name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+</ion-content>
+
+
+

@@ -1,0 +1,68 @@
+<!-- /**
+ * Shoppr - E-commerce app starter Ionic 4(https://www.enappd.com)
+ *
+ * Copyright © 2018-present Enappd. All rights reserved.
+ *
+ * This source code is licensed as per the terms found in the
+ * LICENSE.md file in the root directory of this source .
+ */ -->
+
+<ion-header class="mybg">
+  <ion-toolbar color="mytheme">
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="end" >
+      <ion-back-button text="" color="light" icon="chevron-back-outline"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="light" class="ion-text-center">Brands</ion-title>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title *ngIf = category> 
+       Brand of {{category.name}}
+        </ion-card-title>   
+    </ion-card-header>
+  </ion-card>
+<div *ngIf="category">
+<ion-card *ngFor="let classification of category.classifications">
+  <ion-card-header>
+    <ion-item>
+    <ion-card-title> 
+     {{classification.name}}
+      </ion-card-title>
+      <ion-icon slot ="end" name="pencil-outline" routerLink = "edit/{{classification.id}}" ></ion-icon>
+      <ion-icon slot="end" color="danger" name="trash" (click)="presentAlertConfirm(classification.id)"></ion-icon>
+    </ion-item>
+  </ion-card-header>
+  <ion-card-content>
+   {{classification.description}}
+   <!-- <ion-grid>
+    <ion-row class="ion-justify-content-center">
+      <ion-col>
+        <div class="img">
+        <img class="img1" src = "http://be.ehs.edu.pk/Resources/Images/Breakfast.jpg">
+        <p class="ion-text-center">Banner</p>
+      </div>
+      </ion-col>
+      <ion-col >
+        <div class="img">
+        <img class="img1" src = "http://be.ehs.edu.pk/Resources/Images/Breakfast.jpg">
+       <p class="ion-text-center">thumbnail</p>
+      </div>
+      </ion-col>
+    </ion-row>
+    </ion-grid> -->
+  </ion-card-content>
+</ion-card>
+<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab-button routerLink = "add" color ="mycolor1">
+    <ion-icon  name="add"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+</div>
+</ion-content>

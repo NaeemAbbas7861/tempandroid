@@ -1,0 +1,59 @@
+<ion-header class="mybg">
+  <ion-toolbar color="mytheme">
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-back-button  color="light" defaultHref="/" slot="end"> </ion-back-button>
+    <ion-title  color="light" class="ion-text-center">Viewshop Details</ion-title>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content class="ion-padding"  color="light">
+
+  <ion-card *ngIf = "Viewshop">
+    <ion-item>
+    <ion-label><b>Shop Name :  {{Viewshop.name}}</b></ion-label>
+    <!-- <ion-icon slot ="end" name="pencil-outline" routerLink = "edit/{{product.id}}" ></ion-icon> -->
+  </ion-item>
+  
+    <ion-card-content>
+      <!-- <p *ngIf="shop.isAllowed && !shop.isDisabled" >Status: <span style="color: green;">Active</span></p>
+      <p *ngIf="!shop.isAllowed || shop.isDisabled" >Status: <span style="color: lightcoral;">Pending</span></p> -->
+      <!-- <p>Type: {{shop.group.name}}</p> -->
+      <p>name: {{Viewshop.name}}</p>
+      <!-- <p>description: {{Viewshop.description}} </p> -->
+      <p>address: {{Viewshop.address}}</p>
+      <p>DeliveryRadius: {{Viewshop.deliveryRadius}}</p>
+      <p>contact: {{Viewshop.contact}}</p>
+      <p>NTN : {{Viewshop.ndN_Number}}</p>
+    </ion-card-content>
+  </ion-card>
+
+
+  <ion-card *ngIf= "Viewshop">
+    <ion-item>
+      <ion-label><b>Owner :  {{Viewshop.user.firstName}} {{Viewshop.user.lastName}} </b></ion-label>
+      <!-- <ion-icon slot ="end" name="pencil-outline" routerLink = "edit/{{product.id}}" ></ion-icon> -->
+    </ion-item>
+    <ion-card-content>
+                  <p>address:  {{Viewshop.user.address}}</p>
+                  <p>Email:  {{Viewshop.user.email_Address}}</p>
+                  <p>contact_Number:  {{Viewshop.user.contact_Number}}</p>
+                  <p>cnic:  {{Viewshop.user.cnic}}</p>
+                  <!-- <p>CNIC Picture:  {{Viewshop.user}}</p> -->
+                  <ion-img *ngIf="!Viewshop.user.cniC_Image" class="input ion-padding-vertical" src="../../assets/images/noimage.jpg" class="Image"></ion-img>
+                  <ion-img *ngIf="Viewshop.user.cniC_Image" class="input ion-padding-vertical"[src]="resourceURL + Viewshop.user.cniC_Image " class="Image"></ion-img>
+    </ion-card-content>
+
+  </ion-card>
+
+  
+
+
+  <div class="map1" >
+    <div #mapElement class="map1" ></div>
+  </div>
+
+  
+</ion-content>

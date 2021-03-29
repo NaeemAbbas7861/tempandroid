@@ -1,0 +1,94 @@
+<!-- /**
+ * Shoppr - E-commerce app starter Ionic 4(https://www.enappd.com)
+ *
+ * Copyright © 2018-present Enappd. All rights reserved.
+ *
+ * This source code is licensed as per the terms found in the
+ * LICENSE.md file in the root directory of this source .
+ */ -->
+
+<ion-header class="mybg">
+  <ion-toolbar color="mytheme">
+    <ion-buttons slot="start">
+      <ion-menu-button class="white menu" color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-title color="light">
+      My Order
+    </ion-title>
+    <!-- <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon name="cart" slot="icon-only" (click)="fun.navigate('cart')" class="white" margin></ion-icon>
+      </ion-button>
+    </ion-buttons> -->
+    <ion-back-button  color="light" defaultHref="/" slot="end"> </ion-back-button>
+  </ion-toolbar>
+</ion-header>
+<!-- 
+<ion-content padding color="light" *ngFor="order">
+  <ion-item margin-bottom no-padding lines="none" *ngFor="let order of orders" class="card" (click)="open(order)">
+    <ion-row align-items-center>
+      <ion-col size="2">
+        <img [src]="order.product.image[0]">
+      </ion-col>
+      <ion-col>
+        <ion-row>
+          <ion-text>
+            <h5 class="title" no-margin><strong>{{order.product.name}}</strong></h5>
+          </ion-text>
+        </ion-row>
+        <ion-row>
+          <ion-text>
+            <h6 no-margin class="sub">{{order.status}}</h6>
+          </ion-text>
+        </ion-row>
+      </ion-col>
+      <ion-col float-right size="2">
+        <ion-icon class="item-icon mycolor" name="arrow-dropright" float-right mode="ios"></ion-icon>
+      </ion-col>
+    </ion-row>
+  </ion-item>
+</ion-content> -->
+
+
+<ion-content class="ion-padding" color="light" >
+  <div class="mid" *ngIf="!isloggedin" >
+    <ion-row size="12" class="ion-justify-content-center" disabled="true">
+      <button class="circle">
+        <ion-icon name="cart" size="large"></ion-icon>
+      </button>
+    </ion-row>
+    <ion-row size="12" class="ion-justify-content-center" disabled="true">
+      <ion-text><strong>Your are not logged in </strong></ion-text>
+    </ion-row>
+    <ion-row size="12" class="ion-justify-content-center" disabled="true">
+      <ion-button fill="clear" color="primary" (click)="browse()">Please login and view your Order History</ion-button>
+    </ion-row>
+  </div>
+ <div *ngIf="orders">
+  <ion-card  *ngFor="let orders of orders">
+    <ion-item>
+      <ion-text>Order ID :{{orders.id}} </ion-text>  
+    </ion-item>
+    <ion-item>
+      <ion-button color="mycolor1" routerLink = "/shopowner/order/{{orders.orderStatus}}/{{orders.id}}/items" >View Order</ion-button>
+      <ion-button *ngIf="orders.orderStatus=='0'"  color="mycolor1" (click)="CancelorderStatus(orders.id)" > Cancel Order</ion-button>
+     <ion-button *ngIf=" orders.orderStatus=='1' || orders.orderStatus=='2'" style="font-size: 12px;" color="mycolor1" (click)="presentAlertConfirm(orders.id)"> Mark as received</ion-button>
+    </ion-item>
+    <ion-card-content >
+       <p *ngIf="orders.orderStatus=='2'" > Status: <span style="color: green;"><b>Received</b></span></p>
+      <p *ngIf="orders.orderStatus=='0'" > Status: <span style="color: lightcoral;">New</span></p>
+      <p *ngIf="orders.orderStatus=='1'" > Status: <span style="color: lightcoral;">Pending</span></p>
+      <!-- <p *ngIf="" > Status: <span sty le="color: lightcoral;">Pending</span></p> -->
+      <p *ngIf="orders.orderStatus=='3'">Status: <span style="color: red;"><b>Cancelled</b></span> </p>
+       <p> Placement Date:  {{orders.orderPlacementDate |date:'d-M-yy, h:mm a' }} </p>
+       <p>Order Code  :{{orders.orderCode}} </p>
+       <p>Total  Amount :{{orders.totalAmmount - orders.returnDiscount }}</p>
+    </ion-card-content>
+
+  </ion-card>
+</div>
+<ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+  <ion-refresher-content></ion-refresher-content>
+</ion-refresher>
+
+</ion-content>

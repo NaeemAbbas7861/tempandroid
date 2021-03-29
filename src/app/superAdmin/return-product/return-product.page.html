@@ -1,0 +1,43 @@
+<ion-header class="mybg">
+  <ion-toolbar color="mytheme">
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="end" >
+      <ion-back-button text="" color="light" icon="chevron-back-outline"></ion-back-button>
+    </ion-buttons>
+    <ion-title  color="light" class="ion-text-center">Returnable Product</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title> 
+        RETURN PRODUCT LIST
+        </ion-card-title>   
+    </ion-card-header>
+  </ion-card>
+
+<ion-card  *ngFor="let returnproduct of returnproduct">
+  <ion-card-header>
+    <ion-item>
+    <ion-card-title> 
+     {{returnproduct.name}}
+      </ion-card-title>
+      <ion-icon slot ="end" name="pencil-outline" routerLink = "edit/{{returnproduct.id}}" ></ion-icon>
+      <ion-icon slot="end" color="danger" name="trash" (click)="presentAlertConfirm(returnproduct.id)"></ion-icon>
+    </ion-item>
+  </ion-card-header>
+  <ion-card-content>
+    <strong>Price :{{returnproduct.price}}</strong>
+  </ion-card-content>
+</ion-card>
+<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab-button routerLink = "add" color="mycolor1">
+    <ion-icon  name="add"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+
+</ion-content>

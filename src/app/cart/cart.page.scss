@@ -1,0 +1,74 @@
+.white {
+    color: white;
+}
+ion-content {
+    color: white;
+}
+.circle{
+    border-radius: 40px;
+    background-color:rgb(250, 246, 246);
+    width: 50px;
+    height: 50px;
+}
+.input {
+    background-color: rgb(243, 243, 243);
+    border-radius: 3px;
+    border: 1px solid rgb(240, 240, 240);
+    font-size: .9em !important;
+}
+.pad {
+    padding: 0 6px;
+}
+.mid {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translate(0, -50%);
+}
+.full {
+    width: 100%;
+}
+.cut{
+    color: rgb(120, 120, 120);
+    text-decoration: line-through;
+}
+.blue{
+    color: rgb(219, 158, 7);;
+}
+.sep {
+    height: 1px;
+    background-color: rgb(44, 43, 43);;
+    width: 100vw;
+    margin: 6px 0;
+}
+.text {
+    font-size: .81em;
+    color:rgb(219, 158, 7);
+}
+.select {
+    background-color: rgb(238, 228, 228);
+    border-radius: 3px;
+    border: 1px solid rgb(210, 210, 210);
+    padding: 6px 12px;
+    min-width: 100%;
+}
+.card {
+    background-color:rgb(252, 245, 245);;
+    margin-top: 9px;
+}
+div{
+    min-width: 100%;
+}
+.item-name {
+    font-size: 1em;
+    color: rgb(44, 43, 43);
+}
+.small {
+    margin: 0;
+    font-size: .81em;
+}
+.item-def {
+    font-size: .81em;
+    color: rgb(44, 43, 43);
+}

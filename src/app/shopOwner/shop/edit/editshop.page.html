@@ -1,0 +1,217 @@
+<!-- /**
+ * Shoppr - E-commerce app starter Ionic 4(https://www.enappd.com)
+ *
+ * Copyright © 2018-present Enappd. All rights reserved.
+ *
+ * This source code is licensed as per the terms found in the
+ * LICENSE.md file in the root directory of this source .
+ */ -->
+
+<ion-header class="mybg">
+  <ion-toolbar color="mytheme">
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center" color="light">Edit Shop</ion-title>
+    <ion-buttons slot="end" >
+      <ion-back-button text="" color="light" icon="chevron-back-outline"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content class="ion-padding">
+ 
+  <ion-grid >
+  <form [formGroup]="fg">
+  <ion-row >
+    <ion-col>
+      <ion-label>Shop Name</ion-label>
+      <ion-input type="text" placeholder="Shop Name" formControlName="Name" class="input ion-padding-horizontal" ></ion-input>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.Name">
+          <div class="error-message"
+            *ngIf="fg.get('Name').hasError(validation.type) && (fg.get('Name').dirty || fg.get('Name').touched)">
+            <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="ion-padding-vertical">
+    <ion-col>
+      <ion-label>Contact</ion-label>
+      <ion-input type="text" placeholder="Contact" formControlName="Contact" class="input ion-padding-horizontal" ></ion-input>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.mobileNumber">
+          <div class="error-message"
+            *ngIf="fg.get('Contact').hasError(validation.type) && (fg.get('Contact').dirty || fg.get('Contact').touched)">
+            <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+    </ion-col>
+  </ion-row>
+  <ion-row class="ion-padding-vertical">
+    <ion-col>
+      <ion-label>NTN Number</ion-label>
+      <ion-input type="number"   placeholder="NTN Number" formControlName="NDN_Number" class="input ion-padding-horizontal"></ion-input>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.NDN_Number">
+          <div class="error-message"
+            *ngIf="fg.get('NDN_Number').hasError(validation.type) && (fg.get('NDN_Number').dirty  &&  fg.get('NDN_Number').minlength || fg.get('NDN_Number').touched)">
+            <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-item>
+        <ion-label position="floating">Payment Method</ion-label>
+       <ion-select name="PaymentMethod"   [ngModelOptions]="{standalone: true}" [(ngModel)]="AccountType"  (ionChange)="AccountTypeForPayment($event)">
+         <ion-select-option value="Bank">Bank </ion-select-option>
+         <ion-select-option value="EasyPaisa">EasyPaisa </ion-select-option>
+         <ion-select-option value="JazzCash">JazzCash </ion-select-option>
+       </ion-select>
+      </ion-item>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.Type">
+          <div class="error-message"
+            *ngIf="fg.get('AccountType').hasError(validation.type) && (fg.get('AccountType').dirty || fg.get('AccountType').touched)">
+            <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+      </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col *ngIf="fg.value.AccountType == 'Bank'" >
+      <ion-item>
+        <ion-label position="floating">Select Bank</ion-label>
+       <ion-select name="bank"    [ngModelOptions]="{standalone: true}" [(ngModel)]="BankName" (ionChange)="BankNames($event)">
+         <ion-select-option value="HBL">HBL</ion-select-option>
+       </ion-select>
+      </ion-item>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.BankName">
+          <div class="error-message"
+            *ngIf="fg.get('BankName').hasError(validation.type) && (fg.get('BankName').dirty || fg.get('BankName').touched)">
+            <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+      </ion-col>
+  </ion-row>
+
+
+  <ion-row>
+      <ion-col>
+        <ion-label>Account Number</ion-label>
+        <ion-input type="text"  formControlName="AccountNumber"  placeholder="Account Number" class="input ion-padding-horizontal" ></ion-input>
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_messages.AccountNumber">
+            <div class="error-message"
+              *ngIf="fg.get('AccountNumber').hasError(validation.type) && (fg.get('AccountNumber').dirty || fg.get('AccountNumber').touched)">
+              <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+      </ion-col>
+
+  </ion-row>
+ 
+  <ion-row class="ion-padding-vertical">
+    <ion-col>
+      <ion-label>Delivery Radius</ion-label>
+      <ion-input type="text" placeholder="Radius" formControlName="DeliveryRadius" class="input ion-padding-horizontal" ></ion-input>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.Radious">
+          <div class="error-message"
+            *ngIf="fg.get('DeliveryRadius').hasError(validation.type) && (fg.get('DeliveryRadius').dirty || fg.get('DeliveryRadius').touched)">
+            <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+    </ion-col>
+  </ion-row>
+  <ion-row class="ion-padding-vertical">
+    <ion-col>
+      <ion-label>Address</ion-label>
+      <ion-input type="text" placeholder="Address" formControlName="Address" class="input ion-padding-horizontal" ></ion-input>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.Address">
+          <div class="error-message"
+            *ngIf="fg.get('Address').hasError(validation.type) && (fg.get('Address').dirty || fg.get('Address').touched)">
+            <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+    </ion-col>
+  </ion-row>
+  <!-- <ion-row class="ion-padding-vertical">
+    <ion-col>
+      <ion-checkbox checked="true" formControlName="IsReturnable"></ion-checkbox>
+    <ion-label>  Allow product Exchange</ion-label> 
+    </ion-col>
+  </ion-row> -->
+  <ion-row >
+    <ion-col>
+      <!-- <ion-item>
+      <ion-label position="floating">Shop Category</ion-label>
+     <ion-select name="GroupId" formControlName="GroupId">
+       <ion-select-option *ngFor ="let group of groups" value="{{group.id}}">{{group.name}}</ion-select-option>
+     </ion-select>
+    </ion-item> -->
+   
+      <ion-item>
+      <ion-label position="floating">Shop Category</ion-label><br>
+     <ion-select  [ngModelOptions]="{standalone: true}" [(ngModel)]="GroupId">
+       <ion-select-option *ngFor ="let group of groups" [value]="group.id">{{group.name}}</ion-select-option>
+     </ion-select>
+    </ion-item>
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of validation_messages.Type">
+        <div class="error-message"
+          *ngIf="fg.get('GroupId').hasError(validation.type) && (fg.get('GroupId').dirty || fg.get('GroupId').touched)">
+          <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+    </ion-col>
+  </ion-row>
+  <ion-row class="ion-align-items-center">
+   <!-- <ion-col>
+      <ion-button expand="block"   color="mycolor1" (click)="uploadPhoto('banner')"><strong class="white ion-text-capitalize">Banner</strong></ion-button>
+    </ion-col> -->
+    <ion-col>
+      <ion-button expand="block"   color="mycolor1" (click)="uploadPhoto('logo')"><strong class="white ion-text-capitalize">Logo</strong></ion-button>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <!-- <ion-col>
+       <ion-spinner *ngIf="uploadingbanner" color="mycolor1"></ion-spinner>
+      <ion-img *ngIf="fg.value.Banner" [src]="resourceURL + fg.value.Banner" alt="Banner Image"></ion-img>
+    </ion-col> -->
+    <ion-col>
+      <ion-spinner *ngIf="uploadinglogo" color="mycolor1" class="ion-align-items-center"></ion-spinner>
+      <ion-img *ngIf="fg.value.Logo" [src]="resourceURL + fg.value.Logo" alt="Logo Image"><ion-spinner color="primary"></ion-spinner></ion-img>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-item style="min-height: 300px;">
+        <div #mapElement class="map" style="min-height: 300px;"></div>
+    </ion-item>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-button expand="block" (click)="UpdateShop()" color="mycolor1" [diabled]="!fg.valid" ><strong class="white">Update</strong></ion-button>
+    </ion-col>
+  </ion-row>
+  </form>
+</ion-grid>
+</ion-content>

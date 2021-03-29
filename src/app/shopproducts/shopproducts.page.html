@@ -1,0 +1,23 @@
+<ion-header class="mybg">
+  <ion-toolbar color="mytheme">
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-title color="light"*ngIf="shop">{{shop.name}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="fun.navigate('cart')">
+        <ion-icon name="cart" slot="icon-only" class="white top-btn ion-no-margin"  ></ion-icon>
+      </ion-button>
+      <!-- <ion-button>
+        <ion-icon name="search" slot="icon-only" class="white top-btn ion-no-margin" ></ion-icon>
+      </ion-button> -->
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="shop" class="ion-padding"  >
+ 
+      <app-productlist [recieved_data]="products"></app-productlist>
+      
+  
+</ion-content>

@@ -1,0 +1,44 @@
+
+<ion-header class="mybg">
+  <ion-toolbar color="mytheme">
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button> 
+    </ion-buttons>
+    <ion-back-button  color="light" defaultHref="/" slot="end"> </ion-back-button>
+    <ion-title  color="light" class="ion-text-center">Active</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="ion-padding"  color="light">
+
+  <ion-card *ngFor= "let rider of riders">
+    <ion-item>
+    <ion-label><b>{{rider.firstName }}  {{rider.lastName }} </b></ion-label>
+    <ion-button color="mytheme" size="small" color="danger"   (click)="UnApprovedRider(rider.id)">Disabled </ion-button>
+    
+  </ion-item>
+  
+    <ion-card-content>
+      <!-- <p> First Name: {{login.firstname}}</p>
+      <p>Number: {{shop.contact}}</p>
+      <p>Owner CNIC: {{shop.ownerCNIC}} </p>
+      <p>NDN No: {{shop.ndN_Number}}</p>
+      <p>latitude: {{shop.latitude}}</p>
+      <p>longitude: {{shop.longitude}}</p>
+      <p>Address: {{shop.address}}</p> -->
+      
+      <p> Name: {{rider.firstName}} {{rider.lastName}}</p>
+      <p> Email address: {{rider.email_Address}}</p>
+      <p> Address:  {{rider.address}}</p>
+      <p> Number:{{rider.contact_Number}} </p>
+      <p> CNIC: {{rider.cnic}}  </p>
+      <ion-img *ngIf="!rider.cniC_Image"   class="input ion-padding-vertical"  src="../../assets/images/noimage.jpg"></ion-img>
+      <ion-img *ngIf="rider.cniC_Image" class="input ion-padding-vertical" [src]="resourceURL + rider.cniC_Image" class="Image"></ion-img>
+    </ion-card-content>
+  </ion-card>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  
+</ion-content>

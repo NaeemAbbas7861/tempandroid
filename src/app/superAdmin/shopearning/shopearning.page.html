@@ -1,0 +1,57 @@
+<!-- /**
+ * Shoppr - E-commerce app starter Ionic 4(https://www.enappd.com)
+ *
+ * Copyright © 2018-present Enappd. All rights reserved.
+ *
+ * This source code is licensed as per the terms found in the
+ * LICENSE.md file in the root directory of this source .
+ */ -->
+
+<ion-header class="mybg">
+  <ion-toolbar color="mytheme">
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button> 
+    </ion-buttons>
+    <ion-back-button  color="light" defaultHref="/" slot="end"> </ion-back-button>
+    <ion-title  color="light" class="ion-text-center">Shop Earning</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" *ngIf="earning">
+  <ion-item>
+    <ion-datetime displayFormat="MM, YYYY" [min]="minDate" [max]="maxDate" [(ngModel)]="selectDateString" ></ion-datetime>
+    <ion-button  slot="end" color="mycolor1" (click)="GetShopEarning(id,selectDateString)" size="small"  class="end11"><strong >Search</strong></ion-button>
+  </ion-item>
+
+  <ion-card >
+    <ion-card-content>
+      <p>Total Order Place: {{earning.totalOrders}}</p>
+      <p>Total Amount: {{earning.totalAmount}}</p>
+      <p>Shop Owner Amount: {{earning.shopAmount}}</p>
+      <p *ngif="RoleName">Company  Amount: {{earning.companyAmount}}</p>
+    </ion-card-content>
+  </ion-card>
+  <ion-card *ngIf="orders">
+    <ion-item>Payment Detail</ion-item>
+    <ion-card-content>
+      <p>Account Type: {{accountdetails.shop.accountType}}</p>
+      <p *ngIf="accountdetails.shop.bankName != 'null'"> Bank Name: {{accountdetails.shop.bankName}}</p>
+      <p>Account Number: {{accountdetails.shop.accountNumber}}</p>
+     
+    </ion-card-content>
+  </ion-card>
+  <table >
+    <tr>
+      <th> Order id</th>
+      <th> Order Date</th>
+      <th> Order Amount</th>
+    </tr>
+    <tr *ngFor="let orders of earning.orders" >
+      <td>{{orders.id}}</td>
+      <td>{{orders.orderPlacementDate | date}} </td>
+      <td>{{orders.totalAmmount}}</td>
+    </tr>
+  </table> 
+
+
+</ion-content>

@@ -1,0 +1,46 @@
+
+<ion-header class="mybg">
+  <ion-toolbar color="mytheme">
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-back-button  color="light" defaultHref="/" slot="end"> </ion-back-button>
+    <ion-title  color="light" class="ion-text-center">Enabled shop</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="ion-padding"  color="light">
+
+  <ion-card *ngFor= "let shop of shops">
+    <ion-item>
+    <ion-label><b>{{shop.name}}</b></ion-label>
+   
+
+  </ion-item>
+  <ion-item>
+    <ion-button color="mycolor1" (click)="navigate1(shop.id)"><ion-icon name="eye-outline"></ion-icon></ion-button>
+    <ion-button color="mycolor1" (click)="navigate(shop.id)">Products</ion-button>
+    <ion-button color="mycolor1" (click)="UnonApproved(shop.id,shop)">Disable</ion-button>
+    <ion-button color="mycolor1" (click)="shopearning(shop.id)">Shop Earning</ion-button>
+   
+  </ion-item>
+  
+    <ion-card-content>
+      <p>Type: {{shop.group.name}}</p>
+      <p>Number: {{shop.contact}}</p>
+      <!-- <p>Owner CNIC: {{shop.ownerCNIC}} </p>
+      <p>NDN No: {{shop.ndN_Number}}</p>
+      <p>latitude: {{shop.latitude}}</p>
+      <p>longitude: {{shop.longitude}}</p> -->
+      <p>Address: {{shop.address}}</p>
+    </ion-card-content>
+  </ion-card>
+  <div *ngIf="NotShopFound">
+  <ion-text  class="mid ion-justify-content-center" > No Shops found</ion-text>
+</div>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  
+</ion-content>

@@ -1,0 +1,76 @@
+<ion-header class="mybg">
+  <ion-toolbar color="mytheme">
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button> 
+    </ion-buttons>
+    <ion-title class="ion-text-center" color="light">Users</ion-title>
+    <ion-back-button  color="light" defaultHref="/" slot="end"> </ion-back-button>
+  </ion-toolbar>
+</ion-header>
+<ion-content  class="ion-padding"  color="light"  >
+  <div>
+    
+        <div [ngSwitch]="type" *ngIf="activeCustomer">
+          <ion-list *ngSwitchCase="'ActiveCustomer'">
+            <ion-item>
+              <ion-label ><b>Active Customer</b></ion-label>
+            </ion-item>
+          <ion-item *ngFor="let  activeCustomer of activeCustomer"> 
+              <h6 >  {{ activeCustomer.firstName }} {{activeCustomer.lastName}}</h6><br>   
+              <ion-button  color="mytheme" size="small" color="danger" slot="end" (click)= "UpdateUserStatus(activeCustomer.id)">Disable</ion-button>
+            </ion-item>
+          </ion-list>
+        </div>
+
+        <div [ngSwitch]="type" *ngIf="disabledCustomer">
+            <ion-list *ngSwitchCase="'DisabledCustomer'">
+              <ion-item>
+                <ion-label ><b>Disable Customer</b></ion-label>
+              </ion-item>
+              <ion-item *ngFor="let disabledCustomer of disabledCustomer"> 
+                <h6>  {{ disabledCustomer.firstName }} {{disabledCustomer.lastName}}</h6><br> 
+                <ion-button  color="mytheme" size="small" color="success" slot="end" (click)="UpdateUserStatus(disabledCustomer.id)"> Active</ion-button>
+              </ion-item>
+            </ion-list>
+          </div>
+
+          <div [ngSwitch]="type" *ngIf="activeShopowner">
+              <ion-list *ngSwitchCase="'ActiveShopowner'">
+                <ion-item>
+                  <ion-label ><b>Active Shopowner</b></ion-label>
+                </ion-item>
+                <ion-item *ngFor="let activeShopowner of activeShopowner"> 
+                  <h6>  {{ activeShopowner.firstName }} {{activeShopowner.lastName}}</h6><br>
+                  <ion-button  color="mytheme" size="small" color="danger" slot="end" (click)="UpdateUserStatus(activeShopowner.id)" >Disable</ion-button>
+                </ion-item>
+              </ion-list>
+          </div>
+
+          <div [ngSwitch]="type" *ngIf="disabledShopOwner">
+                <ion-list *ngSwitchCase="'DisabledShopOwner'">
+                  <ion-item>
+                    <ion-label ><b>Disable ShopOwner</b></ion-label>
+                  </ion-item>
+                  <ion-item *ngFor="let disabledShopOwner of disabledShopOwner"> 
+                    <h6>  {{ disabledShopOwner.firstName }} {{disabledShopOwner.lastName}}</h6><br>
+                    <ion-button  color="mytheme" size="small" color="success" slot="end" (click)="UpdateUserStatus(disabledShopOwner.id)"> Active</ion-button>
+                  </ion-item>
+                </ion-list>
+          </div>
+
+  
+  </div>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+</ion-content>
+
+
+<div>
+  <ion-segment [(ngModel)]="type" (ionChange)="segmentChanged($event)"  slot="end"  value="ActiveCustomer"  class="segment23" >
+    <ion-segment-button value="ActiveCustomer"> <ion-icon name="person-add-outline" size="large"  ></ion-icon></ion-segment-button>
+    <ion-segment-button value="DisabledCustomer">  <ion-icon name="person-remove-outline" size="large" class="segment23"  ></ion-icon></ion-segment-button>
+    <ion-segment-button value="ActiveShopowner">  <ion-icon name="medkit-outline" size="large"  ></ion-icon></ion-segment-button>
+    <ion-segment-button   value="DisabledShopOwner" >   <ion-icon name="remove-circle-outline"  size="large"></ion-icon></ion-segment-button>
+  </ion-segment>
+</div>

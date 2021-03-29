@@ -1,0 +1,53 @@
+
+ <ion-header class="mybg">
+  <ion-toolbar color="mytheme">
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding"  color="light">
+
+  <ion-card >
+    <!-- <ion-card-header> -->
+      
+      <!-- <ion-img style="width: 100%;" [src]= shop.logo ></ion-img> -->
+      
+    <!-- </ion-card-header> -->
+    <ion-card-content >
+     <h2>  <b>  Welcome <br> {{sharedservice.user.FirstName}} {{sharedservice.user.LastName}}</b></h2> 
+    </ion-card-content>
+  </ion-card>
+
+
+
+
+    <ion-card>
+      <ion-card-content class="ion-text-center">
+      <ion-row>
+      <ion-col> <h2  (click)="Onclick()" font-size= "40px" > <span  style="color: green;">New Orders  </span> </h2></ion-col>
+      </ion-row>
+    </ion-card-content>
+ </ion-card>
+ <ion-card>
+  <ion-card-content class="ion-text-center">
+  <ion-row>
+  <ion-col> <h2  (click)="Onclick1()" font-size= "40px" > <span  style="color: lightcoral;">Pending Orders  </span> </h2></ion-col>
+  </ion-row>
+</ion-card-content>
+</ion-card>
+
+<ion-card>
+  <ion-card-content class="ion-text-center">
+  <ion-row>
+  <ion-col> <h2  (click)="Onclick2()" font-size= "40px" > <span  style="color: rgb(43, 43, 221);">Complete Orders   </span> </h2></ion-col>
+  </ion-row>
+</ion-card-content>
+</ion-card>
+<ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+  <ion-refresher-content></ion-refresher-content>
+</ion-refresher>
+
+
+</ion-content>

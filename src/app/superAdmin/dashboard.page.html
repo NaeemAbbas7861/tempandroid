@@ -1,0 +1,211 @@
+<!-- /**
+ * Shoppr - E-commerce app starter Ionic 4(https://www.enappd.com)
+ *
+ * Copyright © 2018-present Enappd. All rights reserved.
+ *
+ * This source code is licensed as per the terms found in the
+ * LICENSE.md file in the root directory of this source .
+ */ -->
+
+<ion-header class="mybg">
+  <ion-toolbar color="mytheme">
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-title  color="light" class="ion-text-center">Dashboard</ion-title>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content  *ngIf="data" fullscreen  >
+ 
+
+
+ <ion-row>
+    <ion-col>
+      <ion-card style="height: 120px; width: 150px; text-align: center;" (click)="activeShopOwners()" >
+        <ion-card-content >
+          <ion-icon color="mycolor1" name="create-outline"  class="ion-text-center" size="large"></ion-icon><br>
+          <ion-text class="ion-text-center" style="margin-top: 35px; font-size: 16px;">Total users</ion-text><br>
+          <ion-text style="margin-top: 35px; font-size: 16px; text-align: center;">{{data.totalUsers}} </ion-text>
+           </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col>
+      <ion-card style="height: 120px; width: 150px; text-align: center;" (click)="activeShopOwners()">
+        <ion-card-content >
+          <ion-icon color="mycolor1" name="send-outline"  class="ion-text-center"  size="large"></ion-icon><br>
+          <ion-text class="ion-text-center"style="margin-top: 35px; font-size: 16px; text-align: center;">Active Shop Owners</ion-text><br>
+          <ion-text class="ion-text-center" style="margin-top: 35px; font-size: 16px; text-align: center;">  {{data.activeShopOwners}}</ion-text>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+ 
+  <ion-row>
+    <ion-col>
+      <ion-card style="height: 120px; width: 150px; text-align: center;" (click)="activeShopOwners()">
+        <ion-card-content >
+          <ion-icon color="mycolor1" name="create-outline"   class="ion-text-center" size="large"></ion-icon><br>
+          <ion-text class="ion-text-center" style="margin-top: 35px; font-size: 16px; text-align: center;">Disabled Shop Owners</ion-text><br>
+          <ion-text class="ion-text-center" style="margin-top: 35px; font-size: 16px; text-align: center;">{{data.disabledShopOwners}} </ion-text>
+           </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col>
+      <ion-card style="height: 120px; width: 150px; text-align: center;" (click)="activeShopOwners()">
+        <ion-card-content >
+          <ion-icon color="mycolor1" name="send-outline"   class="ion-text-center" size="large"></ion-icon><br>
+          <ion-text class="ion-text-center"style="margin-top: 35px; font-size: 16px;  text-align: center;">Active Customers </ion-text><br>
+          <ion-text class="ion-text-center" style="margin-top: 35px; font-size: 16px; text-align: center;"> {{data.activeCustomers}} </ion-text>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <ion-card style="height: 120px; width: 150px; text-align: center;" (click)="activeShopOwners()">
+        <ion-card-content >
+          <ion-icon color="mycolor1" name="send-outline" class="ion-text-center" size="large"></ion-icon><br>
+          <ion-text class="ion-text-center"style="margin-top: 35px; font-size: 16px; text-align: center;">Disabled Customers </ion-text><br>
+          <ion-text class="ion-text-center" style="margin-top: 35px; font-size: 16px; text-align: center;"> {{data.disabledCustomers}}</ion-text>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col>
+      <ion-card style="height: 120px; width: 150px; text-align: center;" (click)="activerider()">
+        <ion-card-content >
+          <ion-icon color="mycolor1" name="send-outline" class="ion-text-center" size="large"></ion-icon><br>
+          <ion-text class="ion-text-center"style="margin-top: 35px; font-size: 16px; text-align: center;">Active Riders</ion-text><br>
+          <ion-text class="ion-text-center" style="margin-top: 35px; font-size: 16px;  text-align: center;">  {{data.activeRiders}}</ion-text>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-card style="height: 120px; width: 150px; text-align: center;" (click)="disabledrider()">
+        <ion-card-content >
+          <ion-icon color="mycolor1" name="send-outline" class="ion-text-center" size="large"></ion-icon><br>
+          <ion-text class="ion-text-center"style="margin-top: 35px; font-size: 14px; text-align: center;">Disabled Riders </ion-text><br>
+          <ion-text class="ion-text-center" style="margin-top: 35px; font-size: 14px;  text-align: center;">   {{data.disabledRiders}}</ion-text>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col>
+      <ion-card style="height: 120px; width: 150px; text-align: center;" (click)="activeshop()">
+        <ion-card-content >
+          <ion-icon color="mycolor1" name="send-outline" class="ion-text-center" size="large"></ion-icon><br>
+          <ion-text class="ion-text-center"style="margin-top: 35px; font-size: 16px; text-align: center;">Enabled Shops</ion-text><br>
+          <ion-text class="ion-text-center" style="margin-top: 35px; font-size: 16px; text-align: center;"> {{data.activeShops}}</ion-text>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-card style="height: 120px; width: 150px; text-align: center;" (click)="disabledshop()">
+        <ion-card-content >
+          <ion-icon color="mycolor1" name="send-outline" class="ion-text-center" size="large"></ion-icon><br>
+          <ion-text class="ion-text-center"style="margin-top: 35px; font-size: 16px; text-align: center;">Shops Request</ion-text><br>
+          <ion-text class="ion-text-center" style="margin-top: 35px; font-size: 16px; text-align: center;"> {{data.pendingShops}}</ion-text>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content>
+    </ion-refresher-content>
+   </ion-refresher>
+</ion-content>
+
+<!-- 
+<ion-card>
+  <ion-card-content color="secondary">
+    <ion-row>
+      <ion-col>
+        <p (click)=" activeuser()">Total user: {{data.totalUsers}}</p>
+      </ion-col>
+    </ion-row>
+  </ion-card-content>
+</ion-card>
+
+<ion-card>
+  <ion-card-content>
+    <ion-row>
+      <ion-col>
+        <p (click)="activeshop()"> Approved Shops: {{data.activeShops}}</p>
+      </ion-col>
+    </ion-row>
+  </ion-card-content>
+</ion-card>
+
+<ion-card>
+  <ion-card-content>
+    <ion-row>
+      <ion-col>
+        <p (click)="disabledshop()"> New Shops: {{data.pendingShops}}</p>
+      </ion-col>
+    </ion-row>
+  </ion-card-content>
+</ion-card>
+<ion-card>
+  <ion-card-content>
+    <ion-row>
+      <ion-col>
+        <p (click)="activeShopOwners()">Active Shop Owners: {{data.activeShopOwners}}</p>
+      </ion-col>
+    </ion-row>
+  </ion-card-content>
+</ion-card>
+
+<ion-card>
+  <ion-card-content>
+    <ion-row>
+      <ion-col>
+        <p (click)="activeShopOwners()">Disabled Shop Owners: {{data.disabledShopOwners}}</p>
+      </ion-col>
+    </ion-row>
+  </ion-card-content>
+</ion-card>
+
+<ion-card>
+  <ion-card-content>
+    <ion-row>
+      <ion-col>
+        <p (click)="activeShopOwners()">Active Customers: {{data.activeCustomers}}</p>
+      </ion-col>
+    </ion-row>
+  </ion-card-content>
+</ion-card>
+<ion-card>
+  <ion-card-content>
+    <ion-row>
+      <ion-col>
+        <p (click)="activeShopOwners()">Disabled Customers: {{data.disabledCustomers}}</p>
+      </ion-col>
+    </ion-row>
+  </ion-card-content>
+</ion-card>
+
+<ion-card>
+  <ion-card-content>
+    <ion-row>
+      <ion-col>
+        <p (click)="activerider()">Active Riders: {{data.activeRiders}}</p>
+      </ion-col>
+    </ion-row>
+  </ion-card-content>
+</ion-card>
+<ion-card>
+  <ion-card-content>
+    <ion-row>
+      <ion-col>
+        <p (click)="disabledrider()">Disabled Riders: {{data.disabledRiders}}</p>
+      </ion-col>
+    </ion-row>
+  </ion-card-content>
+</ion-card> -->
+
+  

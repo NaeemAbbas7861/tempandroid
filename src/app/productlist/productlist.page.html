@@ -1,0 +1,46 @@
+<!-- /**
+ * Shoppr - E-commerce app starter Ionic 4(https://www.enappd.com)
+ *
+ * Copyright © 2018-present Enappd. All rights reserved.
+ *
+ * This source code is licensed as per the terms found in the
+ * LICENSE.md file in the root directory of this source .
+ */ -->
+<ion-searchbar placeholder="Search Product" expand="full" [(ngModel)]="searchQuery" (ionChange)="search()">
+</ion-searchbar>
+
+<ion-row>
+  <ion-col *ngFor="let data of recieved_data;" size="6">
+    <ion-card (click)="open(data.id)">
+      <ion-badge class="badge" *ngIf="data.offer">{{data.discount}}%</ion-badge>
+      <img *ngIf="data.images[0]" src="{{env.RESOURCE_URL}}{{data.images[0].path}}" style="height:130px;"
+        [alt]="data.title">
+      <img *ngIf="!data.images[0]" src="../../assets/images/noimage.jpg" style="height:130px;" [alt]="data.title">
+      <ion-card-content>
+        <ion-card-title>
+          <ion-row>
+            <!-- <ion-col *ngIf="data.discount" class="ion-no-padding" >
+              <ion-text class="ion-text-left" ><span class="price"><span class="inline">Rs {{data.cost_price}}</span> <strong>{{data.currency}}{{fun.calculate(data.cost_price, data.discount)}}</strong></span></ion-text>
+            </ion-col> -->
+            <ion-col class="ion-no-padding">
+              <h4 class="ion-text-center">{{data.title}}</h4>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col class="ion-text-center ion-no-padding">
+              <ion-text *ngIf="data.discount <= '0'">
+                <h6 class="text-align-justify " size="14px">Rs. {{data.price}}</h6><br>
+              </ion-text>
+              <ion-text *ngIf="data.discount > '0'">
+                <del class="foot-highlight  text-align-justify" size="14px">Rs. {{data.price}}</del><br>
+              </ion-text>
+              <ion-text *ngIf="data.discount > '0'">
+                <h6 class=" text-align-justify " size="14px">Rs. {{(data.price-((data.price/100)*data.discount) )}}</h6>
+              </ion-text>
+            </ion-col>
+          </ion-row>
+        </ion-card-title>
+      </ion-card-content>
+    </ion-card>
+  </ion-col>
+</ion-row>

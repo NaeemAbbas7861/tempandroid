@@ -1,0 +1,43 @@
+<ion-header class="mybg">
+  <ion-toolbar color="mytheme">
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center" color="light">Orders</ion-title>
+    <ion-back-button  color="light" defaultHref="/" slot="end"> </ion-back-button>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content class="ion-padding"  color="light">
+
+  <ion-card *ngFor= "let order of orders">
+    <ion-item>
+    <ion-label> Order Code: <b>{{order.id}}</b></ion-label>
+    <ion-button color="mycolor1" size="small" routerLink = "{{order.id}}/items">View Items</ion-button>
+  </ion-item>
+    <ion-card-content>
+      <!-- <p *ngIf="shop.isVerified" >Status: <span style="color: green;">Active</span></p>
+      <p *ngIf="!shop.isVerified" >Status: <span style="color: lightcoral;">Pending</span></p> -->
+      <!-- <p>Customer Name: {{order.userId}}</p> -->
+      <!-- <p *ngIf="order.isSelfPick">Delivery Type: Self Pick</p>
+      <p *ngIf="!order.isSelfPick">Delivery Type: Home Delivery</p> -->
+      <p *ngIf="order.orderStatus=='2'"> <span  style="color: green;"> <b>Recevied </b></span> </p>
+      <p *ngIf="order.orderStatus=='1'"> <span  style="color: lightcoral;"> <b>Pending </b></span> </p>
+      <p *ngIf="order.paymentMethod=='2'"> Payment Method: JazzCash </p>
+      <p>Total Amount: {{order.totalAmmount}}</p>
+      <!-- <p>Exchange Amount: {{order.returnDiscount}}</p> -->
+      <p>Place Date: {{order.orderPlacementDate| date}}</p>
+      <p *ngIf="type=='complete'">Delivery Date: {{order.orderDeliveryDate | date}} </p>
+     
+    </ion-card-content>
+  </ion-card>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div *ngIf="OrderNotFound">
+    <ion-text class="mid ion-justify-content-center"> No Orders found </ion-text>
+  </div>
+  
+</ion-content>

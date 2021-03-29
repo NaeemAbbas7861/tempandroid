@@ -1,0 +1,44 @@
+<ion-header class="mybg">
+  <ion-toolbar color="mytheme">
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center" color="light">{{type}} orders</ion-title>
+    <ion-back-button color="light" defaultHref="/" slot="end"> </ion-back-button>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content class="ion-padding" color="light">
+
+  <ion-card *ngFor="let order of orders">
+    <ion-item>
+      <ion-label>Order Id: <b>{{order.id}}</b></ion-label>
+      <ion-button color="mycolor1" size="small" routerLink="{{order.id}}/items"
+        *ngIf="order.orderStatus =='1'">View Details</ion-button>
+
+        <ion-button color="mycolor1" size="small" (click)="acceptOrder(order.id , 1)"
+        *ngIf="order.orderStatus =='0'">Accept Order</ion-button>
+
+    </ion-item>
+    <ion-card-content>
+      <!-- <p *ngIf="shop.isVerified" >Status: <span style="color: green;">Active</span></p>
+      <p *ngIf="!shop.isVerified" >Status: <span style="color: lightcoral;">Pending</span></p> -->
+      <p *ngIf="order.orderStatus=='2'">Status: <span style="color: green;">Complete</span></p>
+      <!-- <p>Shop Id: {{order.shopId}}</p> -->
+      <p>Place Date : {{order.orderPlacementDate | date}}</p>
+      <p *ngIf="order.orderStatus=='2'">Complete Date : {{order.orderDeliveryDate | date}}</p>
+      <p>Shop Id: {{order.shopId}}</p>
+      <!-- <p *ngIf="order.orderStatus=='2'">Payment Method: <span style="color: red;">JazzCash</span> </p> -->
+
+      <!-- <p>Total Amount: {{order.totalAmmount}}</p> -->
+    </ion-card-content>
+  </ion-card>
+
+  <div *ngIf="OrderNotFound">
+    <ion-text class="mid ion-justify-content-center"> No Orders found </ion-text>
+  </div>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+</ion-content>

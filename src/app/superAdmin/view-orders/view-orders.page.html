@@ -1,0 +1,48 @@
+<ion-header class="mybg">
+  <ion-toolbar color="mytheme">
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center" color="light">Orders</ion-title>
+    <ion-back-button  color="light" defaultHref="/" slot="end"> </ion-back-button>
+  </ion-toolbar>
+</ion-header>
+
+<!-- <div >
+  <ion-searchbar placeholder="Search..." expand="full"  [(ngModel)]="searchQuery" (ionChange)="search()"></ion-searchbar>
+</div> -->
+
+
+<ion-content class="ion-padding"  color="light">
+  <ion-row>
+    <ion-col><ion-input class="ion-clearInput"  type="number" placeholder="Search Order Id"  [(ngModel)]="orderid"  class="input ion-padding-horizontal" style="    width: 200px; height: 30px; margin-top: 7px; " ></ion-input></ion-col>
+    <ion-col> <ion-button   color="mycolor1" (click)="Singleorders(orderid)" size="small" style="height: 30px; margin-top: 7px; margin-right: 30px; margin-right: 30px; " class="end11"><strong >Search</strong></ion-button></ion-col>
+   </ion-row>
+     
+  <ion-card *ngFor= "let order of orders">
+    <ion-item>
+    <ion-label> Order ID: <b>{{order.id}}</b></ion-label>
+    <ion-button color="mycolor1" size="small" routerLink = "{{order.id}}/items">View Items</ion-button>
+  </ion-item>
+    <ion-card-content>
+      <!-- <p *ngIf="shop.isVerified" >Status: <span style="color: green;">Active</span></p>
+      <p *ngIf="!shop.isVerified" >Status: <span style="color: lightcoral;">Pending</span></p> -->
+      <!-- <p>Customer Name: {{order.userId}}</p> -->
+      <!-- <p *ngIf="order.isSelfPick">Delivery Type: Self Pick</p>
+      <p *ngIf="!order.isSelfPick">Delivery Type: Home Delivery</p> -->
+      <p *ngIf="order.orderStatus=='2'"> <span  style="color: green;"> <b>Recevied </b></span> </p>
+      <p *ngIf="order.orderStatus=='1'"> <span  style="color: lightcoral;"><b>Pending </b></span> </p>
+      <p *ngIf="order.orderStatus=='0'"> <span  style="color: success;"> <b>New </b></span> </p>
+      <p *ngIf="order.orderStatus=='3'"> <span  style="color: red;"> <b>Cancel </b></span> </p>
+      <p>Shop Name: {{order.shop.name}}</p>
+      <p>Shop Contact: {{order.shop.contact}}</p>
+      <p>Total Amount: {{order.totalAmmount}}</p>
+      <p>Place Date: {{order.orderPlacementDate| date}}</p>
+      <p *ngIf="order.orderStatus=='2'">Delivery Date: {{order.orderDeliveryDate | date}} </p>
+    </ion-card-content>
+  </ion-card>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  
+</ion-content>
