@@ -1,4 +1,8 @@
 # Disables CI builds entirely, then commits don't trigger a build
+- task: Xcode@5
+  inputs:
+    actions: 'build'
+    packageApp: false
 trigger: none
 
 # Activates pull request trigger, so any pull request to the master trigger a build
