@@ -24,7 +24,6 @@ steps:
     xcWorkspacePath: 'ios/App/project.xcworkspace'
     scheme: 'App'
     packageApp: false
-    trigger: none
 
   - task: Npm@1 # Run npm install
     displayName: 'npm install'
