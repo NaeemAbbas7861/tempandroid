@@ -10,8 +10,8 @@ export const environment = {
     // RESOURCE_URL: "http://localhost:80/",
     // BASE_URL: "192.168.10.114:5000/api/",
     // RESOURCE_URL: "192.168.10.114:5000/",
-    BASE_URL:"https://localhost:5001/api/", //"https://be.kuicksave.com/api/",
-     RESOURCE_URL:"https://localhost:5001/", //"https://be.kuicksave.com/",
+    BASE_URL:"https://be.kuicksave.com/api/",
+     RESOURCE_URL:"https://be.kuicksave.com/",
     USER: 'User'
 };
 
