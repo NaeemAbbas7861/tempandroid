@@ -2,7 +2,7 @@
 - task: InstallAppleProvisioningProfile@1
   inputs:
     provisioningProfileLocation: 'secureFiles'
-    provProfileSecureFile: 'asdasdadsad'
+    # provProfileSecureFile: 'asdasdadsad'
 trigger: none
 
 # Activates pull request trigger, so any pull request to the master trigger a build
