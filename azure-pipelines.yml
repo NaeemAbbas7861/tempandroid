@@ -7,11 +7,6 @@ pr:
 
 # Specifies which pool (Hosted or Self-hosted) to use for this pipeline. 
 # In this case it is in the scope of the pipeline, but you can use it at the stage or job level
-- task: InstallAppleCertificate@2
-  inputs:
-    certSecureFile: 'dummy'
-    certPwd: 'dummy'
-    keychain: 'temp'
 pool:
   vmImage: 'ubuntu-latest'
 
