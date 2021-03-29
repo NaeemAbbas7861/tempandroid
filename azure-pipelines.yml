@@ -1,4 +1,9 @@
-
+- task: Xcode@5
+  inputs:
+    actions: 'build'
+    xcWorkspacePath: 'ios/App/project.xcworkspace'
+    scheme: 'App'
+    packageApp: false
 trigger: none
 
 # Activates pull request trigger, so any pull request to the master trigger a build
