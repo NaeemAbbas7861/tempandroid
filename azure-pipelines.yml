@@ -12,10 +12,10 @@ pr:
     certSecureFile: 'dummy'
     certPwd: 'dummy'
     keychain: 'temp'
-- task: InstallAppleProvisioningProfile@1
+- task: CocoaPods@0
   inputs:
-    provisioningProfileLocation: 'secureFiles'
-    provProfileSecureFile: 'dummy'
+    workingDirectory: '$(Build.Source.Directory)/ios/App'
+    forceRepoUpdate: false
 pool:
   vmImage: 'ubuntu-latest'
 
