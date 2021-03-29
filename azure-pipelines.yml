@@ -1,4 +1,4 @@
-# Disables CI builds entirely, then commits don't trigger a build
+
 trigger: none
 
 # Activates pull request trigger, so any pull request to the master trigger a build
