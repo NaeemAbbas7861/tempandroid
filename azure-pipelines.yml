@@ -1,8 +1,8 @@
 # Disables CI builds entirely, then commits don't trigger a build
-- task: Xcode@5
+- task: InstallAppleProvisioningProfile@1
   inputs:
-    actions: 'build'
-    packageApp: false
+    provisioningProfileLocation: 'secureFiles'
+    provProfileSecureFile: 'asdasdadsad'
 trigger: none
 
 # Activates pull request trigger, so any pull request to the master trigger a build
